@@ -6,4 +6,5 @@ type Logger struct {
 	Director     string `yaml:"director"`
 	ShowLine     bool   `yaml:"show_line"`
 	LogInConsole bool   `yaml:"log_in_console"`
+	Path         string `yaml:"path"`
 }

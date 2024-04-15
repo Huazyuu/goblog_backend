@@ -1,0 +1,4 @@
+[gvb][2024-04-15 20:48:53] [36m[info][0m logrus.go:78 gvb_server/core.InitLogger  log uploads success
+[gvb][2024-04-15 20:48:53] [36m[info][0m gorm.go:41 gvb_server/core.InitGorm [root:yanjun@tcp(127.0.0.1:3306)/gvb_db?] mysql connects success
+[gvb][2024-04-15 20:49:27] [36m[info][0m logrus.go:78 gvb_server/core.InitLogger  log uploads success
+[gvb][2024-04-15 20:49:27] [36m[info][0m gorm.go:41 gvb_server/core.InitGorm [root:yanjun@tcp(127.0.0.1:3306)/gvb_db?] mysql connects success

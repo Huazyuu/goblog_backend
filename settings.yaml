@@ -4,7 +4,11 @@ mysql:
   db: gvb_db
   user: root
   password: yanjun
-  log_level: dev
+  max_idle_conns: 10
+  max_open_conns: 100 # 最大空闲连接数
+  max_conn_lifetime: 14400 # 最多可容纳
+  log_level: dev # 连接最大复用时间 小于等于mysql的wait_timeout
+  
 
 logger:
   level: info
@@ -12,6 +16,7 @@ logger:
   director: log #目录
   show_line: true
   log_in_console: true
+  path: "./log/myLog.log"
 
 system:
   host: "0.0.0.0"
