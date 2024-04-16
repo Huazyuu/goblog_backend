@@ -9,20 +9,19 @@ func MakeMigration() {
 	var err error
 	global.DB.SetupJoinTable(&models.UserModel{}, "CollectsModels", &models.UserCollectModel{})
 	global.DB.SetupJoinTable(&models.MenuModel{}, "Banners", &models.MenuBannerModel{})
-	err = global.DB.Set("gorm:table_options", "ENGINE=InnoDB").
-		AutoMigrate(
-			&models.AdvertModel{},
-			&models.ArticleModel{},
-			&models.BannerModel{},
-			&models.CommentModel{},
-			&models.FadeBackModel{},
-			&models.LoginDataModel{},
-			&models.MenuBannerModel{},
-			&models.MenuModel{},
-			&models.MessageModel{},
-			&models.TagModel{},
-			&models.UserModel{},
-		)
+	err = global.DB.Set("gorm:table_options", "ENGINE=InnoDB").AutoMigrate(
+		&models.AdvertModel{},
+		&models.ArticleModel{},
+		&models.BannerModel{},
+		&models.CommentModel{},
+		&models.FadeBackModel{},
+		&models.LoginDataModel{},
+		&models.MenuBannerModel{},
+		&models.MenuModel{},
+		&models.MessageModel{},
+		&models.TagModel{},
+		&models.UserModel{},
+	)
 	if err != nil {
 		global.Logger.Error("[ error ] 生成数据库表结构失败")
 		return
