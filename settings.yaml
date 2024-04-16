@@ -4,10 +4,10 @@ mysql:
   db: gvb_db
   user: root
   password: yanjun
-  max_idle_conns: 10
-  max_open_conns: 100 # 最大空闲连接数
-  max_conn_lifetime: 14400 # 最多可容纳
-  log_level: dev # 连接最大复用时间 小于等于mysql的wait_timeout
+  max_idle_conns: 10 # 最大空闲连接数
+  max_open_conns: 100 # 最多可容纳
+  max_conn_lifetime: 14400 # 连接最大复用时间(s) 小于等于mysql的wait_timeout
+  log_level: dev 
   
 
 logger:
