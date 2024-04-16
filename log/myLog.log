@@ -1,4 +1,25 @@
-[gvb][2024-04-15 20:48:53] [36m[info][0m logrus.go:78 gvb_server/core.InitLogger  log uploads success
-[gvb][2024-04-15 20:48:53] [36m[info][0m gorm.go:41 gvb_server/core.InitGorm [root:yanjun@tcp(127.0.0.1:3306)/gvb_db?] mysql connects success
-[gvb][2024-04-15 20:49:27] [36m[info][0m logrus.go:78 gvb_server/core.InitLogger  log uploads success
-[gvb][2024-04-15 20:49:27] [36m[info][0m gorm.go:41 gvb_server/core.InitGorm [root:yanjun@tcp(127.0.0.1:3306)/gvb_db?] mysql connects success
+[GVB][2024-04-16 13:02:57] [36m[info][0m logrus.go:78 gvb_server/core.InitLogger  log uploads success
+[GVB][2024-04-16 13:02:57] [36m[info][0m gorm.go:41 gvb_server/core.InitGorm [root:yanjun@tcp(127.0.0.1:3306)/gvb_db?] mysql connects success
+[GVB][2024-04-16 13:04:30] [36m[info][0m logrus.go:78 gvb_server/core.InitLogger  log uploads success
+[GVB][2024-04-16 13:04:30] [36m[info][0m gorm.go:41 gvb_server/core.InitGorm [root:yanjun@tcp(127.0.0.1:3306)/gvb_db?] mysql connects success
+[GVB][2024-04-16 13:18:37] [36m[info][0m logrus.go:78 gvb_server/core.InitLogger  log uploads success
+[GVB][2024-04-16 13:18:37] [36m[info][0m gorm.go:41 gvb_server/core.InitGorm [root:yanjun@tcp(127.0.0.1:3306)/gvb_db?] mysql connects success
+[GVB][2024-04-16 13:19:00] [36m[info][0m logrus.go:78 gvb_server/core.InitLogger  log uploads success
+[GVB][2024-04-16 13:19:00] [36m[info][0m gorm.go:41 gvb_server/core.InitGorm [root:yanjun@tcp(127.0.0.1:3306)/gvb_db?] mysql connects success
+[GVB][2024-04-16 13:19:00] [36m[info][0m main.go:18 main.main 0.0.0.0:8080
+[GVB][2024-04-16 13:21:49] [36m[info][0m logrus.go:78 gvb_server/core.InitLogger  log uploads success
+[GVB][2024-04-16 13:21:49] [36m[info][0m gorm.go:41 gvb_server/core.InitGorm [root:yanjun@tcp(127.0.0.1:3306)/gvb_db?] mysql connects success
+[GVB][2024-04-16 13:21:49] [36m[info][0m main.go:18 main.main 0.0.0.0:8080
+[GVB][2024-04-16 13:34:20] [36m[info][0m logrus.go:78 gvb_server/core.InitLogger  log uploads success
+[GVB][2024-04-16 13:34:20] [36m[info][0m gorm.go:41 gvb_server/core.InitGorm [root:yanjun@tcp(127.0.0.1:3306)/gvb_db?] mysql connects success
+[GVB][2024-04-16 13:34:20] [36m[info][0m main.go:18 main.main 0.0.0.0:8080
+[GVB][2024-04-16 13:37:49] [36m[info][0m logrus.go:78 gvb_server/core.InitLogger  log uploads success
+[GVB][2024-04-16 13:37:49] [36m[info][0m gorm.go:41 gvb_server/core.InitGorm [root:yanjun@tcp(127.0.0.1:3306)/gvb_db?] mysql connects success
+[GVB][2024-04-16 13:37:49] [36m[info][0m main.go:18 main.main 0.0.0.0:8080
+[GVB][2024-04-16 13:40:51] [36m[info][0m logrus.go:78 gvb_server/core.InitLogger  log uploads success
+[GVB][2024-04-16 13:40:51] [36m[info][0m gorm.go:41 gvb_server/core.InitGorm [root:yanjun@tcp(127.0.0.1:3306)/gvb_db?] mysql connects success
+[GVB][2024-04-16 13:40:51] [36m[info][0m main.go:18 main.main 0.0.0.0:8080
+[GVB][2024-04-16 13:44:58] [36m[info][0m logrus.go:78 gvb_server/core.InitLogger  log uploads success
+[GVB][2024-04-16 13:44:58] [36m[info][0m gorm.go:41 gvb_server/core.InitGorm [root:yanjun@tcp(127.0.0.1:3306)/gvb_db?] mysql connects success
+[GVB][2024-04-16 13:52:56] [36m[info][0m logrus.go:78 gvb_server/core.InitLogger  log uploads success
+[GVB][2024-04-16 13:52:56] [36m[info][0m gorm.go:41 gvb_server/core.InitGorm [root:yanjun@tcp(127.0.0.1:3306)/gvb_db?] mysql connects success

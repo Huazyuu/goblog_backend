@@ -12,7 +12,7 @@ mysql:
 
 logger:
   level: info
-  prefix: '[gvb]'
+  prefix: '[GVB]'
   director: log #目录
   show_line: true
   log_in_console: true
@@ -21,5 +21,5 @@ logger:
 system:
   host: "0.0.0.0"
   port: 8080
-  env: dev
+  env: release # release debug check
   
