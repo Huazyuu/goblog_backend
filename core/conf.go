@@ -5,13 +5,15 @@ import (
 	"gopkg.in/yaml.v3"
 	"gvb_server/config"
 	"gvb_server/global"
+	"io/fs"
 	"log"
 	"os"
 )
 
+const ConfigFile = "settings.yaml"
+
 // InitCore InitCore读取yaml的配置
 func InitCore() {
-	const ConfigFile = "settings.yaml"
 	c := &config.Config{}
 	yamlConf, err := os.ReadFile(ConfigFile)
 	if err != nil {
@@ -23,4 +25,18 @@ func InitCore() {
 	}
 	log.Println("config yamlFile load init success")
 	global.Config = c
+}
+func SetYaml() error {
+	byteDate, err := yaml.Marshal(global.Config)
+	//fmt.Println(string(byteDate))
+	if err != nil {
+		return err
+	}
+
+	err = os.WriteFile(ConfigFile, byteDate, fs.ModePerm)
+	if err != nil {
+		return err
+	}
+	global.Logger.Info("配置文件修改成功")
+	return nil
 }

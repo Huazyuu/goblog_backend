@@ -11,9 +11,11 @@ type RouterGroup struct {
 
 func InitRouter() *gin.Engine {
 	gin.SetMode(global.Config.System.Env)
+	//gin.DisableConsoleColor()
+	//file, _ := os.Open("./log/myLog.log")
+	//gin.DefaultWriter = io.MultiWriter(file, os.Stdout)
 
 	router := gin.Default()
-
 	apiRouterGroup := router.Group("api")
 	routerGroupApp := RouterGroup{apiRouterGroup}
 

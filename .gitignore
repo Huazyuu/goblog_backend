@@ -1,7 +1,5 @@
-.idea
-
-*.log
-
 .gitignore
-
-/doc/*
+.idea
+log
+doc
+gvb_exe
