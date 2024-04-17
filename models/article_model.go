@@ -19,13 +19,19 @@ type ArticleModel struct {
 	DiggCount     int `json:"digg_count"`     // 点赞量
 	CollectsCount int `json:"collects_count"` // 收藏量
 
-	BannerID uint `json:"banner_id"` // 文章封面id
-	UserID   uint `json:"user_id"`   // 用户id
+	Tags ctype.Array `gorm:"type:string;size:64" json:"tags"` // 文章标签
 
+	// Many to Many 会在两个 model 中添加一张连接表 创建 article_tag_models 表
+	// ArticleModelId -> ArticleModel(id)
+	// TagModelId -> TagModel(id)
 	TagModels     []TagModel     `gorm:"many2many:article_tag_models" json:"tag_models"` // 文章标签
 	CommentModels []CommentModel `gorm:"foreignKey:ArticleID" json:"-"`                  // 文章的评论列表
-	Tags          ctype.Array    `gorm:"type:string;size:64" json:"tags"`                // 文章标签
 
-	UserModel UserModel   `gorm:"foreignKey:UserID" json:"-"`   // 文章作者
-	Banner    BannerModel `gorm:"foreignKey:BannerID" json:"-"` // 文章封面
+	// 外键
+	BannerID uint `json:"banner_id"` // 文章封面id
+	UserID   uint `json:"user_id"`   // 用户id
+	// UserID -> UserModel(id)
+	UserModel UserModel `gorm:"foreignKey:UserID" json:"-"` // 文章作者
+	// BannerID -> BannerModel(id)
+	Banner BannerModel `gorm:"foreignKey:BannerID" json:"-"` // 文章封面
 }

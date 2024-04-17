@@ -13,5 +13,8 @@ type MenuModel struct {
 	BannerTime   int         `json:"banner_time"`                 // 菜单图片的切换时间 为 0 表示不切换
 	Sort         int         `gorm:"size:10" json:"sort"`         // 菜单的顺序
 
+	// 创建 menu_banner_models 连接表
+	// menu_banner_models(menu_id) -> MenuModel (id)
+	// menu_banner_models(banner_id) -> BannerModel (id)
 	Banners []BannerModel `gorm:"many2many:menu_banner_models;joinForeignKey:MenuID;JoinReferences:BannerID" json:"banners"` // 菜单的图片列表
 }
