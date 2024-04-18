@@ -62,3 +62,6 @@ qq:
     app_id: "34"
     key: qui ea irure in
     redirect: voluptate in magna aliqua
+upload:
+  size: 2
+  path: uploads/file

@@ -9,4 +9,5 @@ func (router *RouterGroup) SettingsRouter() {
 
 	router.GET("settings/:name", settingsApi.SettingsInfoView)
 	router.PUT("settings/:name", settingsApi.SettingsInfoUpdateView)
+
 }
