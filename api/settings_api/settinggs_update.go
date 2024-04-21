@@ -68,5 +68,5 @@ func (settingsApi *SettingsApi) SettingsInfoUpdateView(c *gin.Context) {
 		res.FailWithMessage(err.Error(), c)
 		return
 	}
-	res.OkWith(c)
+	res.OkWithSuccess(c)
 }

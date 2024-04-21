@@ -5,9 +5,12 @@ import (
 	"github.com/gin-gonic/gin"
 	"gvb_server/global"
 	"gvb_server/models/res"
+	"gvb_server/utils"
 	"io/fs"
 	"os"
 	"path"
+	"path/filepath"
+	"strings"
 )
 
 type FileUploadResponse struct {
@@ -16,7 +19,7 @@ type FileUploadResponse struct {
 	Msg       string `json:"msg"`
 }
 
-// ImageUploadView 上传图片，返回图片的url
+// ImageUploadView 上传图片,返回图片的url
 func (imagesAps *ImagesApi) ImageUploadView(c *gin.Context) {
 	form, err := c.MultipartForm()
 	if err != nil {
@@ -38,9 +41,21 @@ func (imagesAps *ImagesApi) ImageUploadView(c *gin.Context) {
 		}
 	}
 
+	// response data
 	var resList []FileUploadResponse
 
 	for _, file := range fileList {
+		extension := filepath.Ext(file.Filename)
+		//fmt.Println(extension)
+		if !utils.InStringList(strings.ToLower(extension), global.ImageTypeList) {
+			resList = append(resList, FileUploadResponse{
+				FileName:  file.Filename,
+				IsSuccess: false,
+				Msg:       fmt.Sprint("上传图片格式不符合,请上传以下格式: ", global.ImageTypeList),
+			})
+			continue
+		}
+
 		filePath := path.Join(basePath, file.Filename)
 		// 判断大小
 		size := float64(file.Size) / float64(1024*1024)
@@ -53,8 +68,7 @@ func (imagesAps *ImagesApi) ImageUploadView(c *gin.Context) {
 			continue
 		}
 
-		err = c.SaveUploadedFile(file, filePath)
-		if err != nil {
+		if err = c.SaveUploadedFile(file, filePath); err != nil {
 			global.Logger.Error(err)
 			resList = append(resList, FileUploadResponse{
 				FileName:  file.Filename,
@@ -63,6 +77,7 @@ func (imagesAps *ImagesApi) ImageUploadView(c *gin.Context) {
 			})
 			continue
 		}
+
 		resList = append(resList, FileUploadResponse{
 			FileName:  file.Filename,
 			IsSuccess: true,
