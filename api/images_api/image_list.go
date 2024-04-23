@@ -2,39 +2,25 @@ package images_api
 
 import (
 	"github.com/gin-gonic/gin"
-	"gvb_server/global"
 	"gvb_server/models"
 	"gvb_server/models/res"
+	"gvb_server/service/common"
 )
 
-type Page struct {
-	Page  int    `form:"page"`
-	Limit int    `form:"limit"`
-	Key   string `form:"key"`
-	Sort  string `form:"sort"`
-}
-
-// ImageListView ImageListView分页
+// ImageListView 图片列表查询(支持分页,排序)
 func (imagesApi *ImagesApi) ImageListView(c *gin.Context) {
-	var cr Page
+	var cr models.PageInfo
+
 	err := c.ShouldBindQuery(&cr)
 	if err != nil {
 		res.FailWithCode(res.ArgumentError, c)
 		return
 	}
 
-	var imageList []models.BannerModel
-	// 分页
-	cnt := global.DB.Find(&imageList).Select("id").RowsAffected
-	// fmt.Println(cnt)
-	offset := (cr.Page - 1) * cr.Limit
-	if offset < 0 {
-		offset = 0
-	}
-	global.DB.Limit(cr.Limit).Offset(offset).Find(&imageList)
+	imageList, cnt, err := common.ComList(models.BannerModel{}, common.Option{
+		PageInfo: cr,
+		Debug:    false,
+	})
 
-	res.OkWithData(gin.H{
-		"count": cnt,
-		"list":  imageList,
-	}, c)
+	res.OkWithList(imageList, cnt, c)
 }

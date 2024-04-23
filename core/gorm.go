@@ -21,15 +21,17 @@ func InitGorm() *gorm.DB {
 
 	var mysqlLogger logger.Interface
 	if global.Config.System.Env == "debug" {
-		mysqlLogger = logger.Default.LogMode(logger.Info) //打印所有
+		mysqlLogger = logger.Default.LogMode(logger.Info) // 打印所有
 	} else {
-		mysqlLogger = logger.Default.LogMode(logger.Error) //只打印错误的
+		mysqlLogger = logger.Default.LogMode(logger.Error) // 只打印错误的
 	}
+	global.MySqlLog = logger.Default.LogMode(logger.Info)
+
 	db, err := gorm.Open(mysql.Open(dsn), &gorm.Config{
 		Logger: mysqlLogger,
 	})
 	if err != nil {
-		//global.Log.Fatalf(fmt.Sprintf("[%s] mysql 连接失败", dsn))
+		// global.Log.Fatalf(fmt.Sprintf("[%s] mysql 连接失败", dsn))
 		logrus.Fatalf(fmt.Sprintf("[%s] mysql 连接失败", dsn))
 	}
 
