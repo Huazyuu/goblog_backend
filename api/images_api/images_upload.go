@@ -4,8 +4,10 @@ import (
 	"fmt"
 	"github.com/gin-gonic/gin"
 	"gvb_server/global"
+	"gvb_server/models"
 	"gvb_server/models/res"
 	"gvb_server/utils"
+	"io"
 	"io/fs"
 	"os"
 	"path"
@@ -15,12 +17,12 @@ import (
 
 type FileUploadResponse struct {
 	FileName  string `json:"file_name"`
-	IsSuccess bool   `json:"is_success"` //是否上传成功
+	IsSuccess bool   `json:"is_success"` // 是否上传成功
 	Msg       string `json:"msg"`
 }
 
 // ImageUploadView 上传图片,返回图片的url
-func (imagesAps *ImagesApi) ImageUploadView(c *gin.Context) {
+func (imagesApi *ImagesApi) ImageUploadView(c *gin.Context) {
 	form, err := c.MultipartForm()
 	if err != nil {
 		res.FailWithMessage(err.Error(), c)
@@ -46,7 +48,7 @@ func (imagesAps *ImagesApi) ImageUploadView(c *gin.Context) {
 
 	for _, file := range fileList {
 		extension := filepath.Ext(file.Filename)
-		//fmt.Println(extension)
+		// fmt.Println(extension)
 		if !utils.InStringList(strings.ToLower(extension), global.ImageTypeList) {
 			resList = append(resList, FileUploadResponse{
 				FileName:  file.Filename,
@@ -68,6 +70,30 @@ func (imagesAps *ImagesApi) ImageUploadView(c *gin.Context) {
 			continue
 		}
 
+		// md5 加密
+		fileObj, err := file.Open()
+		if err != nil {
+			global.Logger.Error(err)
+		}
+		byteData, err := io.ReadAll(fileObj)
+		if err != nil {
+			global.Logger.Error(err)
+		}
+		imageHash := utils.Md5(byteData)
+
+		// 去数据库查询文件是否存在
+		var bannerModel models.BannerModel
+		if err = global.DB.Take(&bannerModel, "hash= ?", imageHash).Error; err == nil {
+			// 图片重复 不需要入库
+			resList = append(resList, FileUploadResponse{
+				FileName:  bannerModel.Path,
+				IsSuccess: false,
+				Msg:       "图片已存在与数据库中",
+			})
+			continue
+		}
+
+		// save
 		if err = c.SaveUploadedFile(file, filePath); err != nil {
 			global.Logger.Error(err)
 			resList = append(resList, FileUploadResponse{
@@ -82,6 +108,13 @@ func (imagesAps *ImagesApi) ImageUploadView(c *gin.Context) {
 			FileName:  file.Filename,
 			IsSuccess: true,
 			Msg:       "上传成功",
+		})
+
+		// 入库
+		global.DB.Create(&models.BannerModel{
+			Path: filePath,
+			Hash: imageHash,
+			Name: file.Filename,
 		})
 	}
 	res.OkWithData(resList, c)
