@@ -75,7 +75,7 @@ func InitLogger() *logrus.Logger {
 	}
 	mLog.SetLevel(level)
 	InitDefaultLogger()
-	logrus.Info(" log uploads success")
+	// logrus.Info(" log uploads success")
 	return mLog
 }
 func InitDefaultLogger() {

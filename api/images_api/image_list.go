@@ -7,7 +7,7 @@ import (
 	"gvb_server/service/common"
 )
 
-// ImageListView 图片列表查询(支持分页,排序)
+// ImageListView 图片列表查询(支持分页,排序) // todo 模糊搜索没做
 func (imagesApi *ImagesApi) ImageListView(c *gin.Context) {
 	var cr models.PageInfo
 

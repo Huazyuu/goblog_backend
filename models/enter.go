@@ -15,3 +15,8 @@ type PageInfo struct {
 	Key   string `form:"key"`
 	Sort  string `form:"sort"`
 }
+
+// RemoveRequest 删除请求
+type RemoveRequest struct {
+	IDList []uint `json:"id_list"`
+}

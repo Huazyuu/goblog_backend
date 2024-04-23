@@ -7,5 +7,6 @@ func (router *RouterGroup) ImagesRouter() {
 
 	router.POST("images", imagesApi.ImageUploadView)
 	router.GET("images", imagesApi.ImageListView)
+	router.DELETE("images", imagesApi.ImageRemoveView)
 
 }
