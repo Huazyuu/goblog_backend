@@ -28,7 +28,7 @@ func InitCore() {
 }
 func SetYaml() error {
 	byteDate, err := yaml.Marshal(global.Config)
-	//fmt.Println(string(byteDate))
+	// fmt.Println(string(byteDate))
 	if err != nil {
 		return err
 	}

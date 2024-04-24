@@ -22,46 +22,49 @@ system:
     env: release
 site_info:
     created_at: "2013-07-05 19:56:27"
-    record: minim Lorem incididunt
+    record: 
     title: 导了口往严它
-    qq_image: http://dummyimage.com/400x400
+    qq_image: 
     version: ""
-    email: q.naps@qq.com
-    wechat_image: http://dummyimage.com/400x400
+    email: 
+    wechat_image: 
     name: 想得水需
     job: ""
-    addr: laborum ut nisi
-    slogan: Duis
+    addr: 
+    slogan: 
     slogan_en: ""
     web: ""
-    bilibili_url: http://ecowyhis.sn/tykpjhlysq
-    gitee_url: http://krguikn.ua/bswsvwwb
-    github_url: http://ntjhgxyfko.tel/fbblfdgii
+    bilibili_url: 
+    gitee_url:
+    github_url:
 email:
-    host: ipsum sunt Excepteur ullamco culpa
+    host: ""
     port: 21
-    user: sed nostrud exercitation ut
-    password: reprehenderit deserunt
+    user: xxx
+    password: ""
     default_from_email: b.khanstuo@qq.com
     use_ssl: false
     user_tls: false
 jwt:
-    secret: sint enim
-    expires: 69
-    issuer: tempor incididunt aliqua
+    secret: 
+    expires: 
+    issuer: ""
+    
+# 七牛云 图片设置
 qi_niu:
     enable: true
-    access_key: ""
-    secret_key: ""
-    bucket: Excepteur
+    access_key: "ERpQ2dJ8acGpjWjxb1N4IouEENpBhxInCcYs6lZP"
+    secret_key: "qU70P6PiUhSAZ9VylMyALPWG1nIqta327XypaqV-"
+    bucket: "zyuuforyu"
     cdn: ipsum
-    zone: laborum minim
+    # 存储区域
+    zone: z1
     prefix: Excepteur veniam ea nulla voluptate
     size: 96
 qq:
     app_id: "34"
-    key: qui ea irure in
-    redirect: voluptate in magna aliqua
+    key: ""
+    redirect: ""
 upload:
   size: 2
   path: uploads/file

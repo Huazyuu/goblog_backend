@@ -16,7 +16,12 @@ func (imagesApi *ImagesApi) ImageRemoveView(c *gin.Context) {
 		res.FailWithCode(res.ArgumentError, c)
 		return
 	}
-
+	/*
+		可以将一个主键切片传递给Delete 方法，以便更高效的删除数据量大的记录
+		var users = []User{{ID: 1}, {ID: 2}, {ID: 3}}
+		db.Delete(&users)
+		// DELETE FROM users WHERE id IN (1,2,3);
+	*/
 	var imageList []models.BannerModel
 	// SELECT * FROM `banner_models` WHERE `banner_models`.`id` = cr.IDList
 	count := global.DB.Find(&imageList, cr.IDList).RowsAffected
