@@ -1,27 +1,14 @@
 package images_api
 
 import (
-	"fmt"
 	"github.com/gin-gonic/gin"
 	"gvb_server/global"
-	"gvb_server/models"
-	"gvb_server/models/ctype"
 	"gvb_server/models/res"
-	"gvb_server/plugins/qiniu"
-	"gvb_server/utils"
-	"io"
+	"gvb_server/service"
+	"gvb_server/service/img_service"
 	"io/fs"
 	"os"
-	"path"
-	"path/filepath"
-	"strings"
 )
-
-type FileUploadResponse struct {
-	FileName  string `json:"file_name"`
-	IsSuccess bool   `json:"is_success"` // 是否上传成功
-	Msg       string `json:"msg"`
-}
 
 // ImageUploadView 上传图片,返回图片的url
 func (imagesApi *ImagesApi) ImageUploadView(c *gin.Context) {
@@ -46,101 +33,29 @@ func (imagesApi *ImagesApi) ImageUploadView(c *gin.Context) {
 	}
 
 	// response data
-	var resList []FileUploadResponse
+	var resList []img_service.FileUploadResponse
 
 	for _, file := range fileList {
-		extension := filepath.Ext(file.Filename)
-		// fmt.Println(extension)
-		if !utils.InStringList(strings.ToLower(extension), global.ImageTypeList) {
-			resList = append(resList, FileUploadResponse{
-				FileName:  file.Filename,
-				IsSuccess: false,
-				Msg:       fmt.Sprint("上传图片格式不符合,请上传以下格式: ", global.ImageTypeList),
-			})
+		// 上传文件 调用服务层
+		serviceRes := service.ServiceApp.ImageService.ImageUploadService(file)
+		// false
+		if !serviceRes.IsSuccess {
+			resList = append(resList, serviceRes)
 			continue
 		}
-
-		filePath := path.Join(basePath, file.Filename)
-		// 判断大小
-		size := float64(file.Size) / float64(1024*1024)
-		if size >= float64(global.Config.Upload.Size) {
-			resList = append(resList, FileUploadResponse{
-				FileName:  file.Filename,
-				IsSuccess: false,
-				Msg:       fmt.Sprintf("图片大小为 %.2f MB,请上传: %d MB大小图片", size, global.Config.Upload.Size),
-			})
-			continue
-		}
-
-		// md5 加密
-		fileObj, err := file.Open()
-		if err != nil {
-			global.Logger.Error(err)
-		}
-		byteData, err := io.ReadAll(fileObj)
-		if err != nil {
-			global.Logger.Error(err)
-		}
-		imageHash := utils.Md5(byteData)
-
-		// 去数据库查询文件是否存在
-		var bannerModel models.BannerModel
-		if err = global.DB.Take(&bannerModel, "hash= ?", imageHash).Error; err == nil {
-			// 图片重复 不需要入库
-			resList = append(resList, FileUploadResponse{
-				FileName:  bannerModel.Path,
-				IsSuccess: false,
-				Msg:       "图片已存在与数据库中",
-			})
-			continue
-		}
-
-		// qiniu
-		if global.Config.QiNiu.Enable {
-			filePath, err = qiniu.UploadImage(byteData, file.Filename, "gvb")
+		// true and check qiniu enable
+		if !global.Config.QiNiu.Enable {
+			// save on local
+			err = c.SaveUploadedFile(file, serviceRes.FileName)
 			if err != nil {
 				global.Logger.Error(err)
+				serviceRes.Msg = err.Error()
+				serviceRes.IsSuccess = false
+				resList = append(resList, serviceRes)
 				continue
 			}
-			resList = append(resList, FileUploadResponse{
-				FileName:  filePath,
-				IsSuccess: true,
-				Msg:       "上传七牛云成功",
-			})
-			// 入库
-			global.DB.Create(&models.BannerModel{
-				Path:      filePath,
-				Hash:      imageHash,
-				Name:      file.Filename,
-				ImageType: ctype.QiNiu,
-			})
-			continue
 		}
-
-		// save
-		if err = c.SaveUploadedFile(file, filePath); err != nil {
-			global.Logger.Error(err)
-			resList = append(resList, FileUploadResponse{
-				FileName:  file.Filename,
-				IsSuccess: false,
-				Msg:       err.Error(),
-			})
-			continue
-		}
-
-		resList = append(resList, FileUploadResponse{
-			FileName:  file.Filename,
-			IsSuccess: true,
-			Msg:       "上传成功",
-		})
-
-		// 入库
-		global.DB.Create(&models.BannerModel{
-			Path:      filePath,
-			Hash:      imageHash,
-			Name:      file.Filename,
-			ImageType: ctype.Local,
-		})
+		resList = append(resList, serviceRes)
 	}
 	res.OkWithData(resList, c)
 }

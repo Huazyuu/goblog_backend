@@ -1,70 +1,71 @@
 mysql:
-    host: 127.0.0.1
-    port: 3306
-    config: "charset=utf8mb4&parseTime=True&loc=Local"
-    db: gvb_db
-    user: root
-    password: yanjun
-    log_level: dev
-    max_idle_conns: 10
-    max_open_conns: 100
-    max_conn_lifetime: 14400
+  host: 127.0.0.1
+  port: 3306
+  config: "charset=utf8mb4&parseTime=True&loc=Local"
+  db: gvb_db
+  user: root
+  password: yanjun
+  log_level: dev
+  max_idle_conns: 10
+  max_open_conns: 100
+  max_conn_lifetime: 14400
 logger:
-    level: info
-    prefix: '[GVB]'
-    director: log
-    show_line: true
-    log_in_console: true
-    path: ./log/myLog.log
+  level: info
+  prefix: '[GVB]'
+  director: log
+  show_line: true
+  log_in_console: true
+  path: ./log/myLog.log
 system:
-    host: 0.0.0.0
-    port: 8080
-    env: release
+  host: 0.0.0.0
+  port: 8080
+  env: release
 site_info:
-    created_at: "2013-07-05 19:56:27"
-    record: 
-    title: 导了口往严它
-    qq_image: 
-    version: ""
-    email: 
-    wechat_image: 
-    name: 想得水需
-    job: ""
-    addr: 
-    slogan: 
-    slogan_en: ""
-    web: ""
-    bilibili_url: 
-    gitee_url:
-    github_url:
+  created_at: "2013-07-05 19:56:27"
+  record:
+  title: 导了口往严它
+  qq_image:
+  version: ""
+  email:
+  wechat_image:
+  name: 想得水需
+  job: ""
+  addr:
+  slogan:
+  slogan_en: ""
+  web: ""
+  bilibili_url:
+  gitee_url:
+  github_url:
 email:
-    host: ""
-    port: 21
-    user: xxx
-    password: ""
-    default_from_email: b.khanstuo@qq.com
-    use_ssl: false
-    user_tls: false
+  host: ""
+  port: 21
+  user: xxx
+  password: ""
+  default_from_email: b.khanstuo@qq.com
+  use_ssl: false
+  user_tls: false
 jwt:
-    secret: 
-    expires: 
-    issuer: ""
-    
+  secret:
+  expires:
+  issuer: ""
+
 # 七牛云 图片设置
 qi_niu:
-    enable: true
-    access_key: "ERpQ2dJ8acGpjWjxb1N4IouEENpBhxInCcYs6lZP"
-    secret_key: "qU70P6PiUhSAZ9VylMyALPWG1nIqta327XypaqV-"
-    bucket: "zyuuforyu"
-    cdn: ipsum
-    # 存储区域
-    zone: z1
-    prefix: Excepteur veniam ea nulla voluptate
-    size: 96
+  enable: false
+  access_key: "ERpQ2dJ8acGpjWjxb1N4IouEENpBhxInCcYs6lZP"
+  secret_key: "qU70P6PiUhSAZ9VylMyALPWG1nIqta327XypaqV-"
+  bucket: "zyuuoverseas"
+  cdn:
+  # 存储区域
+  #    zone: z1 华北
+  zone: as0 # 新加坡
+  prefix: gvb
+  size: 5
 qq:
-    app_id: "34"
-    key: ""
-    redirect: ""
+  app_id: "34"
+  key: ""
+  redirect: ""
 upload:
   size: 2
   path: uploads/file
