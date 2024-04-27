@@ -16,7 +16,7 @@ import (
 	"strings"
 )
 
-var WhiteImageList = []string{
+/*var WhiteImageList = []string{
 	".bmp", ".jpg", ".png",
 	".tif", ".gif", ".pcx",
 	".tga", ".exif", ".fpx",
@@ -25,7 +25,7 @@ var WhiteImageList = []string{
 	".eps", ".ai", ".raw",
 	".WMF", ".webp", ".avif",
 	".apng",
-}
+}*/
 
 type FileUploadResponse struct {
 	FileName  string `json:"file_name"`
@@ -36,13 +36,12 @@ type FileUploadResponse struct {
 // ImageUploadService image upload service
 func (ImageService) ImageUploadService(file *multipart.FileHeader) (res FileUploadResponse) {
 	fileName := file.Filename
-	basePath := global.Config.Upload.Path
-	filePath := path.Join(basePath, file.Filename)
+	filePath := path.Join(global.Config.Upload.Path, file.Filename)
 	var fileType ctype.ImageType
 	res.FileName = filePath
 
 	// 白名单
-	extension := filepath.Ext(file.Filename)
+	extension := filepath.Ext(fileName)
 	if !utils.InStringList(strings.ToLower(extension), global.ImageTypeList) {
 		res.Msg = "非法文件"
 		return

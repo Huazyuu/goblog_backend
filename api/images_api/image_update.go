@@ -16,7 +16,7 @@ func (imagesApi *ImagesApi) ImageUpdateView(c *gin.Context) {
 	var cr ImageUpdateRequest
 	err := c.ShouldBindJSON(&cr)
 	if err != nil {
-		res.FailWithError(err, &cr, c)
+		res.FailWithCode(res.ArgumentError, c)
 		return
 	}
 	var imageModel models.BannerModel
