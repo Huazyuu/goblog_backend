@@ -2,6 +2,8 @@ package advert_api
 
 import (
 	"github.com/gin-gonic/gin"
+	"gorm.io/gorm"
+	"gorm.io/gorm/logger"
 	"gvb_server/global"
 	"gvb_server/models"
 	"gvb_server/models/res"
@@ -17,7 +19,7 @@ func (AdvertApi) AdvertCreatView(c *gin.Context) {
 
 	// 判重
 	var advert models.AdvertModel
-	err = global.DB.Take(&advert, "title = ?", cr.Title).Error
+	err = global.DB.Session(&gorm.Session{Logger: logger.Default.LogMode(logger.Silent)}).Take(&advert, "title = ?", cr.Title).Error
 	if err == nil {
 		res.FailWithMessage("图片已存在", c)
 		return
