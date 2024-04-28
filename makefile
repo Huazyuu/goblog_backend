@@ -21,6 +21,8 @@ gotool :
 	go fmt ./
 	go vet ./
 
+swag :
+	swag init
 clean :
 	@if [ -f ${BINARY} ] ; then rm ${BINARY} ; fi
 
