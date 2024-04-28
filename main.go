@@ -8,6 +8,9 @@ import (
 	"gvb_server/routers"
 )
 
+// swagger api_doc
+// http://127.0.0.1:8080/swagger/index.html#/
+
 // @title gvb-server API文档
 // @version 1.0
 // @description API文档

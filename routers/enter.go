@@ -36,6 +36,8 @@ func InitRouter() *gin.Engine {
 	routerGroupApp.ImagesRouter()
 	// advert api
 	routerGroupApp.AdvertRouter()
+	// menu api
+	routerGroupApp.MenuRouter()
 
 	return router
 }
