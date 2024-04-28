@@ -21,12 +21,21 @@ func (AdvertApi) AdvertUpdateView(c *gin.Context) {
 		res.FailWithMessage("广告不存在", c)
 		return
 	}
-	err = global.DB.Debug().Model(&advert).Updates(models.AdvertModel{
+	//  Updates 方法默认会忽略零值
+	// 使用 struct 更新时, GORM 将只更新非零值字段。 你可能想用 map 来更新属性，或者使用 Select 声明字段来更新
+	err = global.DB.Model(&advert).Select("title", "href", "images", "is_show").Updates(&models.AdvertModel{
 		Title:  cr.Title,
 		Href:   cr.Href,
 		Images: cr.Images,
 		IsShow: cr.IsShow,
 	}).Error
+	//  将 is_show 的值更新为 false，Update 方法实际上不会执行任何操作，因为它将 false 视为零值。
+	/*	err = global.DB.Model(&advert).
+		Update("Title", cr.Title).
+		Update("Href", cr.Href).
+		Update("Images", cr.Images).
+		Update("IsShow", cr.IsShow).Error*/
+
 	if err != nil {
 		global.Logger.Error(err)
 		res.FailWithMessage("修改广告失败", c)
