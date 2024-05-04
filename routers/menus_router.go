@@ -2,7 +2,7 @@ package routers
 
 import "gvb_server/api"
 
-func (router *RouterGroup) MenuRouter() {
+func (router *RouterGroup) MenusRouter() {
 	MenuApi := api.ApiGroupApp.MenuApi
 
 	router.POST("menus", MenuApi.MenuCreateView)

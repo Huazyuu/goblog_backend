@@ -30,14 +30,16 @@ func InitRouter() *gin.Engine {
 	apiRouterGroup := router.Group("api")
 	routerGroupApp := RouterGroup{apiRouterGroup}
 
-	// 系统配置api
+	// settings api
 	routerGroupApp.SettingsRouter()
 	// images api
 	routerGroupApp.ImagesRouter()
-	// advert api
+	// adverts api
 	routerGroupApp.AdvertRouter()
-	// menu api
-	routerGroupApp.MenuRouter()
+	// menus api
+	routerGroupApp.MenusRouter()
+	// users api
+	routerGroupApp.UsersRouter()
 
 	return router
 }

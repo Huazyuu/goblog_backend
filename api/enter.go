@@ -5,13 +5,15 @@ import (
 	"gvb_server/api/images_api"
 	"gvb_server/api/menus_api"
 	"gvb_server/api/settings_api"
+	"gvb_server/api/users_api"
 )
 
 type ApiGroup struct {
 	SettingsApi settings_api.SettingsApi
 	ImagesApi   images_api.ImagesApi
 	AdvertApi   advert_api.AdvertApi
-	MenuApi     menus_api.MenuApi
+	MenuApi     menus_api.MenusApi
+	UserApi     users_api.UsersApi
 }
 
 var ApiGroupApp = new(ApiGroup)

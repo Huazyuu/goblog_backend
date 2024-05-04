@@ -21,13 +21,13 @@ func (MenusApi) MenuListView(c *gin.Context) {
 	var menuList []models.MenuModel
 	var menuIDList []uint
 	//  SELECT * FROM `menu_models` ORDER BY sort desc
-	global.DB.Debug().Order("sort desc").Find(&menuList).Select("id").Scan(&menuIDList)
+	global.DB.Order("sort desc").Find(&menuList).Select("id").Scan(&menuIDList)
 	// menuBanner
 	var menuBanners []models.MenuBannerModel
 
 	// SELECT `id` FROM `menu_models` ORDER BY sort desc
 	//  SELECT * FROM `banner_models` WHERE `banner_models`.`id` IN (3,2,1)
-	global.DB.Debug().Preload("BannerModel").Order("sort desc").Find(&menuBanners, "menu_id in ?", menuIDList)
+	global.DB.Preload("BannerModel").Order("sort desc").Find(&menuBanners, "menu_id in ?", menuIDList)
 	// resp
 	var menus []MenuResponse
 	for _, model := range menuList {
