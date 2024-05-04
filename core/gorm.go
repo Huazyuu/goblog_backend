@@ -40,7 +40,7 @@ func InitGorm() *gorm.DB {
 	sqlDB.SetMaxOpenConns(global.Config.Mysql.MaxOpenConns)
 	sqlDB.SetConnMaxLifetime(time.Duration(global.Config.Mysql.MaxConnLifeTime))
 
-	logrus.Infof(fmt.Sprintf("[%s] mysql connects success", dsn))
+	// logrus.Infof(fmt.Sprintf("[%s] mysql connects success", dsn))
 
 	return db
 }
