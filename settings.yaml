@@ -46,9 +46,9 @@ email:
   use_ssl: false
   user_tls: false
 jwt:
-  secret:
-  expires:
-  issuer: ""
+  secret: "zyuuforyu"
+  expires: 720
+  issuer: "zyuu"
 
 # 七牛云 图片设置
 qi_niu:
