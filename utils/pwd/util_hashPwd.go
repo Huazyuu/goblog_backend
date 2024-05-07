@@ -14,10 +14,10 @@ func HashPwd(pwd string) (string, error) {
 }
 
 // CheckPwd 解hash 验证密码
-func CheckPwd(hashPwd string, pwd string) error {
+func CheckPwd(hashPwd string, pwd string) (bool, error) {
 	err := bcrypt.CompareHashAndPassword([]byte(hashPwd), []byte(pwd))
 	if err != nil {
-		return err
+		return false, err
 	}
-	return nil
+	return true, nil
 }

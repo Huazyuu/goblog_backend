@@ -29,7 +29,7 @@ func TestHashCheckPwd(t *testing.T) {
 			if err != nil {
 				t.Error(err)
 			}
-			if err = CheckPwd(got, tt.args.pwd); err != nil {
+			if _, err = CheckPwd(got, tt.args.pwd); err != nil {
 				t.Errorf("HashPwd() = %v, err: %v", got, err)
 			}
 		})
