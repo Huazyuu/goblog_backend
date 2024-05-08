@@ -5,7 +5,7 @@ import "fmt"
 type Mysql struct {
 	Host            string `yaml:"host"`
 	Port            int    `yaml:"port"`
-	Config          string `yaml:"config"` //高级配置,如charset
+	Config          string `yaml:"config"` // 高级配置,如charset
 	DB              string `yaml:"db"`
 	User            string `yaml:"user"`
 	Password        string `yaml:"password"`

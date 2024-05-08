@@ -47,13 +47,13 @@ func (l *LogFormatter) Format(entry *logrus.Entry) ([]byte, error) {
 
 	logger := global.Config.Logger
 
-	//时间格式自定义
+	// 时间格式自定义
 	timestamp := entry.Time.Format("2006-01-02 15:04:05")
 	if entry.HasCaller() {
 		// 文件路劲
 		funcVal := entry.Caller.Function
 		fileVal := fmt.Sprintf("%s:%d", path.Base(entry.Caller.File), entry.Caller.Line)
-		//输出格式
+		// 输出格式
 		_, _ = fmt.Fprintf(b, "%s[%s] \x1b[%dm[%s]\x1b[0m %s %s %s\n", logger.Prefix, timestamp, levelColor, entry.Level, fileVal, funcVal, entry.Message)
 	}
 	return b.Bytes(), nil
@@ -66,9 +66,9 @@ func InitLogger() *logrus.Logger {
 	if err != nil {
 		log.Fatalf("create file %s failed: %v", global.Config.Logger.Path, err)
 	}
-	mLog.SetOutput(io.MultiWriter(writer2, writer1))    //输出类型
-	mLog.SetReportCaller(global.Config.Logger.ShowLine) //行号
-	mLog.SetFormatter(&LogFormatter{})                  //自定义
+	mLog.SetOutput(io.MultiWriter(writer2, writer1))    // 输出类型
+	mLog.SetReportCaller(global.Config.Logger.ShowLine) // 行号
+	mLog.SetFormatter(&LogFormatter{})                  // 自定义
 	level, err := logrus.ParseLevel(global.Config.Logger.Level)
 	if err != nil {
 		level = logrus.InfoLevel
@@ -84,12 +84,12 @@ func InitDefaultLogger() {
 	if err != nil {
 		log.Fatalf("create file %s failed: %v", global.Config.Logger.Path, err)
 	}
-	logrus.SetOutput(io.MultiWriter(writer2, writer1))    //输出类型
-	logrus.SetReportCaller(global.Config.Logger.ShowLine) //行号
+	logrus.SetOutput(io.MultiWriter(writer2, writer1))    // 输出类型
+	logrus.SetReportCaller(global.Config.Logger.ShowLine) // 行号
 	logrus.SetFormatter(&LogFormatter{})
 	level, err := logrus.ParseLevel(global.Config.Logger.Level)
 	if err != nil {
 		level = logrus.InfoLevel
 	}
-	logrus.SetLevel(level) //设置最低的level
+	logrus.SetLevel(level) // 设置最低的level
 }

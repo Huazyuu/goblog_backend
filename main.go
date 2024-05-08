@@ -21,7 +21,7 @@ func main() {
 	core.InitCore()
 	// log
 	global.Logger = core.InitLogger()
-	// 连接数据库
+	// gorm
 	global.DB = core.InitGorm()
 	// flag
 	option := flag.Parse()
@@ -29,6 +29,8 @@ func main() {
 		flag.SwitchOption(option)
 		return
 	}
+	// redis
+	global.Redis = core.InitRedis()
 	// router
 	router := routers.InitRouter()
 	addr := global.Config.System.Addr()
