@@ -1,73 +1,73 @@
 mysql:
-    host: 127.0.0.1
-    port: 3306
-    config: charset=utf8mb4&parseTime=True&loc=Local
-    db: gvb_db
-    user: root
-    password: yanjun
-    log_level: dev
-    max_idle_conns: 10
-    max_open_conns: 100
-    max_conn_lifetime: 14400
+  host: 127.0.0.1
+  port: 3306
+  config: charset=utf8mb4&parseTime=True&loc=Local
+  db: gvb_db
+  user: root
+  password: yanjun
+  log_level: dev
+  max_idle_conns: 10
+  max_open_conns: 100
+  max_conn_lifetime: 14400
 logger:
-    level: info
-    prefix: '[GVB]'
-    director: log
-    show_line: true
-    log_in_console: true
-    path: ./log/myLog.log
+  level: info
+  prefix: '[GVB]'
+  director: log
+  show_line: true
+  log_in_console: true
+  path: ./log/myLog.log
 system:
-    host: 0.0.0.0
-    port: 8080
-    env: debug
+  host: 0.0.0.0
+  port: 8080
+  env: debug
 site_info:
-    created_at: "2013-07-05 19:56:27"
-    record: ""
-    title: ""
-    qq_image: ""
-    version: ""
-    email: ""
-    wechat_image: ""
-    name: ""
-    job: ""
-    addr: ""
-    slogan: ""
-    slogan_en: ""
-    web: ""
-    bilibili_url: ""
-    gitee_url: ""
-    github_url: ""
+  created_at: "2013-07-05 19:56:27"
+  record: ""
+  title: ""
+  qq_image: ""
+  version: ""
+  email: ""
+  wechat_image: ""
+  name: ""
+  job: ""
+  addr: ""
+  slogan: ""
+  slogan_en: ""
+  web: ""
+  bilibili_url: ""
+  gitee_url: ""
+  github_url: ""
 email:
-    host: ut incididunt laboris
-    port: 15
-    user: ut aute Duis cillum consectetur
-    password: cupidatat
-    default_from_email: s.rumvkj@qq.com
-    use_ssl: true
-    user_tls: true
+  host: "smtp.qq.com"
+  port: 465
+  user: zyuuforyu@foxmail.com
+  password: "ofmvbcxttulidgei"
+  default_from_email: zyuu_email_test
+  use_ssl: true
+  user_tls: true
 jwt:
-    secret: zyuuforyu
-    expires: 720
-    issuer: zyuu
+  secret: zyuuforyu
+  expires: 24
+  issuer: zyuu
 qi_niu:
-    enable: false
-    access_key: ERpQ2dJ8acGpjWjxb1N4IouEENpBhxInCcYs6lZP
-    secret_key: qU70P6PiUhSAZ9VylMyALPWG1nIqta327XypaqV-
-    bucket: zyuuoverseas
-    cdn: ""
-    zone: as0
-    prefix: gvb
-    size: 5
+  enable: false
+  access_key: ERpQ2dJ8acGpjWjxb1N4IouEENpBhxInCcYs6lZP
+  secret_key: qU70P6PiUhSAZ9VylMyALPWG1nIqta327XypaqV-
+  bucket: zyuuoverseas
+  cdn: ""
+  zone: as0
+  prefix: gvb
+  size: 5
 qq:
-    app_id: "34"
-    key: ""
-    redirect: ""
+  app_id: "34"
+  key: ""
+  redirect: ""
 upload:
-    size: 2
-    path: uploads/file
+  size: 2
+  path: uploads/file
 redis:
-    ip: 127.0.0.1
-    port: 6379
-    password: ""
-    pool_size: 100
-    db: 0
+  ip: 127.0.0.1
+  port: 6379
+  password: ""
+  pool_size: 100
+  db: 0

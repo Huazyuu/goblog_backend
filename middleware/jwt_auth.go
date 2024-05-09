@@ -4,6 +4,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"gvb_server/models/ctype"
 	"gvb_server/models/res"
+	"gvb_server/service/redisServer"
 	"gvb_server/utils/jwt"
 )
 
@@ -18,6 +19,12 @@ func JwtAuth() gin.HandlerFunc {
 		claims, err := jwt.ParseToken(token)
 		if err != nil {
 			res.FailWithMessage("token错误", c)
+			c.Abort()
+			return
+		}
+		// 是否在redis中
+		if redisServer.CheckLogout(token) {
+			res.FailWithMessage("token已失效", c)
 			c.Abort()
 			return
 		}
@@ -41,6 +48,11 @@ func JwtAdmin() gin.HandlerFunc {
 		}
 		if claims.Role != int(ctype.PermissionAdmin) {
 			res.FailWithMessage("权限错误", c)
+			c.Abort()
+			return
+		}
+		if redisServer.CheckLogout(token) {
+			res.FailWithMessage("token已失效", c)
 			c.Abort()
 			return
 		}

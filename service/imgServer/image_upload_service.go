@@ -1,4 +1,4 @@
-package img_service
+package imgServer
 
 import (
 	"fmt"

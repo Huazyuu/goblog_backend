@@ -5,7 +5,7 @@ import (
 	"gvb_server/global"
 	"gvb_server/models/res"
 	"gvb_server/service"
-	"gvb_server/service/img_service"
+	"gvb_server/service/imgServer"
 	"io/fs"
 	"os"
 )
@@ -33,7 +33,7 @@ func (imagesApi *ImagesApi) ImageUploadView(c *gin.Context) {
 	}
 
 	// response data
-	var resList []img_service.FileUploadResponse
+	var resList []imgServer.FileUploadResponse
 
 	for _, file := range fileList {
 		// 上传文件 调用服务层
