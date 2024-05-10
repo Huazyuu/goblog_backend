@@ -42,6 +42,8 @@ func InitRouter() *gin.Engine {
 	routerGroupApp.UsersRouter()
 	// tags api
 	routerGroupApp.TagRouter()
+	// messages api
+	routerGroupApp.MessageRouter()
 
 	return router
 }
