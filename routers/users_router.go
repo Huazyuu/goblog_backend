@@ -14,6 +14,7 @@ func (router *RouterGroup) UsersRouter() {
 	router.Use(sessions.Sessions("sessionid", store))
 
 	router.POST("users/email_login", usersApi.EmailLoginView)
+	router.POST("users", usersApi.UserCreateView)
 	// todo qq login router
 	router.GET("login", usersApi.QQLoginView)
 
