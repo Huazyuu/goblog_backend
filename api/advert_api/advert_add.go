@@ -9,7 +9,7 @@ import (
 	"gvb_server/models/res"
 )
 
-// AdvertCreatView 添加广告
+// AdvertCreateView 添加广告
 // @Tags 广告管理
 // @Summary 创建广告
 // @Description 创建广告
@@ -18,7 +18,7 @@ import (
 // @Router /api/adverts [post]
 // @Produce json
 // @Success 200 {object} res.Response{}
-func (AdvertApi) AdvertCreatView(c *gin.Context) {
+func (AdvertApi) AdvertCreateView(c *gin.Context) {
 	var cr AdvertRequest
 	err := c.ShouldBindJSON(&cr)
 	if err != nil {

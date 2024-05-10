@@ -40,6 +40,8 @@ func InitRouter() *gin.Engine {
 	routerGroupApp.MenusRouter()
 	// users api
 	routerGroupApp.UsersRouter()
+	// tags api
+	routerGroupApp.TagRouter()
 
 	return router
 }
