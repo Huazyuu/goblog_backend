@@ -26,7 +26,7 @@ func (UsersApi) UserRemoveView(c *gin.Context) {
 
 	// 事务
 	err = global.DB.Transaction(func(tx *gorm.DB) error {
-		// TODO:删除用户，消息表，评论表，用户收藏的文章，用户发布的文章
+		// todo 删除用户，消息表，评论表，用户收藏的文章，用户发布的文章
 		err = global.DB.Delete(&userList).Error
 		if err != nil {
 			global.Logger.Error(err)
