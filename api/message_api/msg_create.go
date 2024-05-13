@@ -28,11 +28,13 @@ func (MessageApi) MessageCreateView(c *gin.Context) {
 		SendUserID:       cr.SenderId,
 		SendUserNickName: sender.NickName,
 		SendUserAvatar:   sender.Avatar,
-		RevUserID:        cr.ReceiverId,
-		RevUserNickName:  receiver.NickName,
-		RevUserAvatar:    receiver.Avatar,
-		IsRead:           false,
-		Content:          cr.Content,
+
+		RevUserID:       cr.ReceiverId,
+		RevUserNickName: receiver.NickName,
+		RevUserAvatar:   receiver.Avatar,
+
+		IsRead:  false,
+		Content: cr.Content,
 	}).Error
 	if err != nil {
 		res.FailWithMessage("消息发送失败", c)
