@@ -8,10 +8,6 @@ import (
 	"gvb_server/utils/jwt"
 )
 
-type MessageRecordRequest struct {
-	UserID uint `json:"user_id" binding:"required" msg:"请输入查询的用户id"`
-}
-
 func (MessageApi) MessageRecordView(c *gin.Context) {
 	var cr MessageRecordRequest
 	err := c.ShouldBindJSON(&cr)
@@ -27,7 +23,7 @@ func (MessageApi) MessageRecordView(c *gin.Context) {
 		Find(&_messageList, "send_user_id = ? or rev_user_id = ?", claims.UserID, claims.UserID)
 
 	if claims.UserID == cr.UserID {
-		res.FailWithMessage("查询与对方的不可为自己的id", c)
+		res.FailWithMessage("没有自身聊天消息,请查询其他id", c)
 		return
 	}
 

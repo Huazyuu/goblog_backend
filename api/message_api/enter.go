@@ -23,3 +23,7 @@ type Message struct {
 	CreateAt       time.Time `json:"create_at"`
 	MessageContent int       `json:"message_content"`
 }
+
+type MessageRecordRequest struct {
+	UserID uint `json:"user_id" binding:"required" msg:"请输入查询的用户id"`
+}
