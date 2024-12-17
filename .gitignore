@@ -6,6 +6,6 @@ tmp
 testdata
 uploads/file
 settings.yaml
-
+models/article_backup.go
 
 

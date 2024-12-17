@@ -14,7 +14,7 @@ buildlinux :
 run : 
 	go run main.go
 
-init db :
+db :
 	go run main.go -db
 
 gotool :

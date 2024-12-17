@@ -7,11 +7,11 @@ import (
 
 func MakeMigration() {
 	var err error
-	_ = global.DB.SetupJoinTable(&models.UserModel{}, "CollectsModels", &models.UserCollectModel{})
+	// _ = global.DB.SetupJoinTable(&models.UserModel{}, "CollectsModels", &models.UserCollectModel{})
 	_ = global.DB.SetupJoinTable(&models.MenuModel{}, "Banners", &models.MenuBannerModel{})
 	err = global.DB.Set("gorm:table_options", "ENGINE=InnoDB").AutoMigrate(
 		&models.AdvertModel{},
-		&models.ArticleModel{},
+		// &models.ArticleModel{},
 		&models.BannerModel{},
 		&models.CommentModel{},
 		&models.FadeBackModel{},

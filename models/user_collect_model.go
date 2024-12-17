@@ -6,8 +6,8 @@ import "time"
 type UserCollectModel struct {
 	UserID uint `gorm:"primaryKey"`
 	// UserID -> UserModel(id)
-	UserModel    UserModel    `gorm:"foreignKey:UserID"`
-	ArticleID    uint         `gorm:"primaryKey"`
-	ArticleModel ArticleModel `gorm:"foreignKey:ArticleID"`
-	CreatedAt    time.Time
+	UserModel UserModel `gorm:"foreignKey:UserID"`
+	ArticleID uint      `gorm:"primaryKey"`
+	// ArticleModel ArticleModel `gorm:"foreignKey:ArticleID"`
+	CreatedAt time.Time
 }

@@ -3,21 +3,26 @@ package flag
 import (
 	sysFlag "flag"
 	"github.com/fatih/structs"
+	"gvb_server/core"
+	"gvb_server/global"
 )
 
 type Option struct {
 	DB   bool
-	User string
+	User string // -u admin -u user
+	ES   string // -es create -es delete
 }
 
 // Parse 解析命令行参数
 func Parse() Option {
 	db := sysFlag.Bool("db", false, "初始化数据库 -db")
 	user := sysFlag.String("u", "", "创建用户 -u user")
+	es := sysFlag.String("es", "", "es操作 -es")
 	sysFlag.Parse()
 	return Option{
 		DB:   *db,
 		User: *user,
+		ES:   *es,
 	}
 }
 
@@ -43,11 +48,15 @@ func IsWebStop(option Option) (flag bool) {
 func SwitchOption(option Option) {
 	if option.DB {
 		MakeMigration()
+		return
 	}
 	if option.User == "admin" || option.User == "user" {
 		CreateUser(option.User)
-	} else {
-		sysFlag.Usage()
+		return
+	}
+	if option.ES == "create" {
+		global.ESClient = core.InitElasticSearch()
+		EsCreateIndex()
 	}
 
 }

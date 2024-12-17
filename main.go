@@ -23,14 +23,19 @@ func main() {
 	global.Logger = core.InitLogger()
 	// gorm
 	global.DB = core.InitGorm()
+
 	// flag
 	option := flag.Parse()
 	if flag.IsWebStop(option) {
 		flag.SwitchOption(option)
 		return
 	}
+
 	// redis
 	global.Redis = core.InitRedis()
+	// es
+	global.ESClient = core.InitElasticSearch()
+
 	// router
 	router := routers.InitRouter()
 	addr := global.Config.System.Addr()
