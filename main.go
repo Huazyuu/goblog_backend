@@ -40,7 +40,6 @@ func main() {
 	router := routers.InitRouter()
 	addr := global.Config.System.Addr()
 	global.Logger.Infof("[gvb]  backend 运行在 %s", addr)
-
 	err := router.Run(global.Config.System.Addr())
 	if err != nil {
 		global.Logger.Error(err.Error())
