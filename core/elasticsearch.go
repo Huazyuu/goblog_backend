@@ -14,6 +14,7 @@ func InitElasticSearch() *elastic.Client {
 		sniffOpt,
 		elastic.SetBasicAuth(global.Config.ES.User, global.Config.ES.Password),
 	)
+	// fmt.Println(global.Config.ES.URL())
 	if err != nil {
 		logrus.Fatalf("es连接失败 %s", err.Error())
 	}

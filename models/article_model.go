@@ -184,17 +184,19 @@ func (a ArticleModel) Create() (err error) {
 	return nil
 }
 
-// ISExistData 是否存在该文章
-func (a ArticleModel) ISExistData() bool {
+// ISExistTitle 是否存在该文章
+func (a ArticleModel) ISExistTitle() bool {
 	res, err := global.ESClient.
 		Search(a.Index()).
 		Query(elastic.NewTermQuery("keyword", a.Title)).
 		Size(1).
 		Do(context.Background())
+	// fmt.Println(res.Hits.TotalHits.Value)
 	if err != nil {
 		logrus.Error(err.Error())
 		return false
 	}
+
 	if res.Hits.TotalHits.Value > 0 {
 		return true
 	}

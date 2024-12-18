@@ -7,12 +7,25 @@ import (
 	"github.com/russross/blackfriday"
 	"gvb_server/global"
 	"gvb_server/models"
+	"gvb_server/models/ctype"
 	"gvb_server/models/res"
 	"gvb_server/utils/jwt"
 	"math/rand"
 	"strings"
 	"time"
 )
+
+type ArticleRequest struct {
+	Title string `json:"title" binding:"required" msg:"文章标题必填"` // 文章标题
+	// Keyword string      `json:"keywords" msg:"Keywords"`
+	Abstract string      `json:"abstract"`                                // 文章简介
+	Content  string      `json:"content" binding:"required" msg:"文章内容必填"` // 文章内容
+	Category string      `json:"category"`                                // 文章分类
+	Source   string      `json:"source"`                                  // 文章来源
+	Link     string      `json:"link"`                                    // 原文链接
+	BannerID uint        `json:"banner_id"`                               // 文章封面id
+	Tags     ctype.Array `json:"tags"`                                    // 文章标签
+}
 
 func (ArticlesApi) ArticleCreateView(c *gin.Context) {
 	var cr ArticleRequest
@@ -85,6 +98,7 @@ func (ArticlesApi) ArticleCreateView(c *gin.Context) {
 		CreatedAt:    time.Now().Format("2006-01-02 15:04:05"),
 		UpdatedAt:    time.Now().Format("2006-01-02 15:04:05"),
 		Title:        cr.Title,
+		Keyword:      cr.Title,
 		Abstract:     cr.Abstract,
 		Content:      cr.Content,
 		UserID:       userID,
@@ -96,6 +110,12 @@ func (ArticlesApi) ArticleCreateView(c *gin.Context) {
 		BannerID:     cr.BannerID,
 		BannerUrl:    bannerUrl,
 		Tags:         cr.Tags,
+	}
+
+	// 标题去重
+	if article.ISExistTitle() {
+		res.FailWithMessage("文章已存在", c)
+		return
 	}
 
 	err = article.Create()
