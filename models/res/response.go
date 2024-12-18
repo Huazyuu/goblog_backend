@@ -46,6 +46,7 @@ func OkWithSuccess(c *gin.Context) {
 }
 
 func OkWithList(list any, count int64, c *gin.Context) {
+
 	OkWithData(ListResponse[any]{
 		List:  list,
 		Count: count,
