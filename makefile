@@ -21,6 +21,12 @@ gotool :
 	go fmt ./
 	go vet ./
 
+es create:
+	go run main.go -es create
+
+es remove:
+	go run main.go -es remove
+
 swag :
 	swag init
 clean :

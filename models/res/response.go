@@ -40,11 +40,9 @@ func OkWithData(data any, c *gin.Context) {
 func OkWithMessage(msg string, c *gin.Context) {
 	Result(Success, map[string]any{}, msg, c)
 }
-
 func OkWithSuccess(c *gin.Context) {
 	Result(Success, map[string]any{}, "成功", c)
 }
-
 func OkWithList(list any, count int64, c *gin.Context) {
 
 	OkWithData(ListResponse[any]{
@@ -57,11 +55,9 @@ func OkWithList(list any, count int64, c *gin.Context) {
 func Fail(data any, msg string, c *gin.Context) {
 	Result(Error, data, msg, c)
 }
-
 func FailWithMessage(msg string, c *gin.Context) {
 	Result(Error, map[string]any{}, msg, c)
 }
-
 func FailWithCode(code ErrorCode, c *gin.Context) {
 	msg, ok := ErrorMap[code]
 	if ok {
@@ -70,7 +66,6 @@ func FailWithCode(code ErrorCode, c *gin.Context) {
 	}
 	Result(Error, map[string]any{}, "未知错误", c)
 }
-
 func FailWithError(err error, obj any, c *gin.Context) {
 	msg := utils.GetValidMsg(err, obj)
 	FailWithMessage(msg, c)

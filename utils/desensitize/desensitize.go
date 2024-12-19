@@ -2,6 +2,7 @@ package desensitize
 
 import "strings"
 
+// DesensitizationEmail 简单*加密
 func DesensitizationEmail(email string) string {
 	// 256655@qq.com  2****@qq.com
 	// yaheb7479@yaho.com  y****@yaho.com

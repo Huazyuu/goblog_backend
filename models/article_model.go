@@ -8,7 +8,7 @@ import (
 	"gvb_server/models/ctype"
 )
 
-// ArticleModel 文章表
+// ArticleModel 文章表 es存取 index相当于表名 mapping表结构
 type ArticleModel struct {
 	ID        string `json:"id"`         // es的id
 	CreatedAt string `json:"created_at"` // 创建时间

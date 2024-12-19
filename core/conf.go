@@ -13,9 +13,12 @@ import (
 const ConfigFile = "settings.yaml"
 
 // InitCore InitCore读取yaml的配置
-func InitCore() {
+func InitCore(path string) {
+	if path == "" {
+		path = ConfigFile
+	}
 	c := &config.Config{}
-	yamlConf, err := os.ReadFile(ConfigFile)
+	yamlConf, err := os.ReadFile(path)
 	if err != nil {
 		panic(fmt.Errorf("get yamlConf error : %s", err))
 	}
@@ -27,7 +30,7 @@ func InitCore() {
 	global.Config = c
 }
 func SetYaml() error {
-	
+
 	byteDate, err := yaml.Marshal(global.Config)
 	// fmt.Println(string(byteDate))
 	if err != nil {

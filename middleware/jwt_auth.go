@@ -8,6 +8,7 @@ import (
 	"gvb_server/utils/jwt"
 )
 
+// JwtAuth jwt auth权限
 func JwtAuth() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		token := c.Request.Header.Get("token")
@@ -32,6 +33,7 @@ func JwtAuth() gin.HandlerFunc {
 	}
 }
 
+// JwtAdmin jwt Admin权限
 func JwtAdmin() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		token := c.Request.Header.Get("token")

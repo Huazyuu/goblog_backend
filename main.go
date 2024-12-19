@@ -18,7 +18,7 @@ import (
 // @BasePath /
 func main() {
 	// 读取配置文件
-	core.InitCore()
+	core.InitCore("")
 	// log
 	global.Logger = core.InitLogger()
 	// gorm
