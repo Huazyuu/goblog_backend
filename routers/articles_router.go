@@ -18,6 +18,8 @@ func (router *RouterGroup) ArticlesRouter() {
 	router.GET("/articles/calendar", articlesApi.ArticleCalendarView)
 	// 文章tag列表
 	router.GET("/articles/tags", articlesApi.ArticleTagListView)
+	// 更新文章
+	router.PUT("/articles", middleware.JwtAuth(), articlesApi.ArticleUpdateView)
 	// 文章id查询detail
 	router.GET("/articles/:id", articlesApi.ArticleDetailView)
 }

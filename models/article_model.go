@@ -10,32 +10,33 @@ import (
 
 // ArticleModel 文章表 es存取 index相当于表名 mapping表结构
 type ArticleModel struct {
-	ID        string `json:"id"`         // es的id
-	CreatedAt string `json:"created_at"` // 创建时间
-	UpdatedAt string `json:"updated_at"` // 更新时间
+	// structs struct 转 map 后的key
+	ID        string `structs:"id" json:"id"`                 // es的id
+	CreatedAt string `structs:"created_at" json:"created_at"` // 创建时间
+	UpdatedAt string `structs:"updated_at" json:"updated_at"` // 更新时间
 
-	Title    string `json:"title"`              // 文章标题
-	Keyword  string `json:"keyword,omit(list)"` // 关键字
-	Abstract string `json:"abstract"`           // 文章简介
-	Content  string `json:"content,omit(list)"` // 文章内容
+	Title    string `structs:"title" json:"title"`                // 文章标题
+	Keyword  string `structs:"keyword" json:"keyword,omit(list)"` // 关键字
+	Abstract string `structs:"abstract" json:"abstract"`          // 文章简介
+	Content  string `structs:"content" json:"content,omit(list)"` // 文章内容
 
-	LookCount     int `json:"look_count"`     // 浏览量
-	CommentCount  int `json:"comment_count"`  // 评论量
-	DiggCount     int `json:"digg_count"`     // 点赞量
-	CollectsCount int `json:"collects_count"` // 收藏量
+	LookCount     int `structs:"look_count" json:"look_count"`         // 浏览量
+	CommentCount  int `structs:"comment_count" json:"comment_count"`   // 评论量
+	DiggCount     int `structs:"digg_count" json:"digg_count"`         // 点赞量
+	CollectsCount int `structs:"collects_count" json:"collects_count"` // 收藏量
 
-	UserID       uint   `json:"user_id"`        // 用户id
-	UserNickName string `json:"user_nick_name"` // 用户昵称
-	UserAvatar   string `json:"user_avatar"`    // 用户头像
+	UserID       uint   `structs:"user_id" json:"user_id"`               // 用户id
+	UserNickName string `structs:"user_nick_name" json:"user_nick_name"` // 用户昵称
+	UserAvatar   string `json:"user_avatar"`                             // 用户头像
 
-	Category string `json:"category"`          // 文章分类
-	Source   string `json:"source,omit(list)"` // 文章来源
-	Link     string `json:"link,omit(list)"`   // 原文链接
+	Category string `structs:"category" json:"category"`        // 文章分类
+	Source   string `structs:"source" json:"source,omit(list)"` // 文章来源
+	Link     string `structs:"link" json:"link,omit(list)"`     // 原文链接
 
-	BannerID  uint   `json:"banner_id"`  // 文章封面id
-	BannerUrl string `json:"banner_url"` // 文章封面
+	BannerID  uint   `structs:"banner_id" json:"banner_id"`   // 文章封面id
+	BannerUrl string `structs:"banner_url" json:"banner_url"` // 文章封面
 
-	Tags ctype.Array `json:"tags"` // 文章标签
+	Tags ctype.Array `structs:"tags" json:"tags"` // 文章标签
 }
 
 func (ArticleModel) Index() string {
