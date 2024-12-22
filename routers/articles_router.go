@@ -20,6 +20,8 @@ func (router *RouterGroup) ArticlesRouter() {
 	router.GET("/articles/tags", articlesApi.ArticleTagListView)
 	// 更新文章
 	router.PUT("/articles", middleware.JwtAuth(), articlesApi.ArticleUpdateView)
+	// 删除文章(list)
+	router.DELETE("/articles", middleware.JwtAuth(), articlesApi.ArticleRemoveView)
 	// 文章id查询detail
 	router.GET("/articles/:id", articlesApi.ArticleDetailView)
 }

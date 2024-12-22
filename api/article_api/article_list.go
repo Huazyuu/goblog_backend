@@ -9,13 +9,22 @@ import (
 	"gvb_server/service/esServer"
 )
 
+type ArticleSearchRequest struct {
+	models.PageInfo
+	Tag string `json:"tag" form:"tag"`
+}
+
 func (ArticlesApi) ArticleListView(c *gin.Context) {
-	var cr models.PageInfo
+	var cr ArticleSearchRequest
 	if err := c.ShouldBindQuery(&cr); err != nil {
 		res.FailWithCode(res.ArgumentError, c)
 		return
 	}
-	list, count, err := esServer.CommList(cr.Key, cr.Page, cr.Limit)
+	list, count, err := esServer.CommList(esServer.Option{
+		PageInfo: cr.PageInfo,
+		Fields:   []string{"title", "abstract", "content"},
+		Tag:      cr.Tag,
+	})
 	if err != nil {
 		global.Logger.Error(err.Error())
 		res.FailWithMessage("查询失败", c)

@@ -8,34 +8,76 @@ import (
 	"github.com/sirupsen/logrus"
 	"gvb_server/global"
 	"gvb_server/models"
+	"strings"
 )
 
-func CommList(key string, page, limit int) (list []models.ArticleModel, count int, err error) {
+type Option struct {
+	models.PageInfo
+	Fields []string
+	Tag    string
+}
 
+func (o *Option) GetFrom() int {
+	if o.Page == 0 {
+		o.Page = 1
+	}
+	if o.Limit == 0 {
+		o.Limit = 10
+	}
+	return (o.Page - 1) * o.Limit
+}
+
+func CommList(option Option) (list []models.ArticleModel, count int, err error) {
 	boolSearch := elastic.NewBoolQuery()
-	from := page
-	if key != "" {
+
+	if option.Key != "" {
 		boolSearch.Must(
-			elastic.NewMatchQuery("title", key),
+			// 搜索内容(关键词) ...搜索字段
+			elastic.NewMultiMatchQuery(option.Key, option.Fields...),
 		)
 	}
-	if limit == 0 {
-		limit = 10
+	if option.Tag != "" {
+		boolSearch.Must(
+			// 根据tag搜索
+			elastic.NewMultiMatchQuery(option.Tag, "tags"),
+		)
 	}
-	if from == 0 {
-		from = 1
+	type SortField struct {
+		Field     string
+		Ascending bool // 升序
+	}
+	sortField := SortField{
+		Field:     "created_at", // default
+		Ascending: false,        // asc->true  desc->false
+	}
+	if option.Sort != "" {
+		_list := strings.Split(option.Sort, " ")
+		if len(_list) == 2 && (_list[1] == "desc") || (_list[1] == "asc") {
+			sortField.Field = _list[0]
+			if _list[1] == "desc" {
+				sortField.Ascending = false
+			}
+			if _list[1] == "asc" {
+				sortField.Ascending = true
+			}
+		}
+
 	}
 
 	res, err := global.ESClient.
 		Search(models.ArticleModel{}.Index()).
 		Query(boolSearch).
-		From((from - 1) * limit).
-		Size(limit).
+		Highlight(elastic.NewHighlight().Field("title")).
+		From(option.GetFrom()).
+		Sort(sortField.Field, sortField.Ascending).
+		Size(option.Limit).
 		Do(context.Background())
+
 	if err != nil {
 		logrus.Error(err.Error())
 		return
 	}
+
 	count = int(res.Hits.TotalHits.Value) // 搜索到结果总条数
 	var demoList []models.ArticleModel
 	for _, hit := range res.Hits.Hits {
@@ -49,6 +91,10 @@ func CommList(key string, page, limit int) (list []models.ArticleModel, count in
 		if err != nil {
 			logrus.Error(err)
 			continue
+		}
+		title, ok := hit.Highlight["title"]
+		if ok {
+			model.Title = title[0]
 		}
 		model.ID = hit.Id
 		demoList = append(demoList, model)

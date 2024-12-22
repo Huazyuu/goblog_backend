@@ -2,6 +2,7 @@ package models
 
 import (
 	"context"
+	"encoding/json"
 	"github.com/olivere/elastic/v7"
 	"github.com/sirupsen/logrus"
 	"gvb_server/global"
@@ -205,4 +206,18 @@ func (a ArticleModel) ISExistTitle() bool {
 		return true
 	}
 	return false
+}
+
+// GetDataByID 查找文章
+func (a *ArticleModel) GetDataByID(id string) error {
+	res, err := global.ESClient.
+		Get().Index(a.Index()).Id(id).
+		Do(context.Background())
+	// fmt.Println(res.Hits.TotalHits.Value)
+	if err != nil {
+		logrus.Error(err.Error())
+		return err
+	}
+	err = json.Unmarshal(res.Source, a)
+	return err
 }
