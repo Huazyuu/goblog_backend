@@ -22,6 +22,12 @@ func (router *RouterGroup) ArticlesRouter() {
 	router.PUT("/articles", middleware.JwtAuth(), articlesApi.ArticleUpdateView)
 	// 删除文章(list)
 	router.DELETE("/articles", middleware.JwtAuth(), articlesApi.ArticleRemoveView)
+	// 文章收藏
+	router.POST("/articles/collects", middleware.JwtAuth(), articlesApi.ArticleCollectionCreateView)
+	// 文章收藏列表
+	router.GET("/articles/collects", middleware.JwtAuth(), articlesApi.ArticleCollectionListView)
+	// 文章收藏删除
+	router.DELETE("/articles/collects", middleware.JwtAuth(), articlesApi.ArticleCollBatchRemoveView)
 	// 文章id查询detail
 	router.GET("/articles/:id", articlesApi.ArticleDetailView)
 }

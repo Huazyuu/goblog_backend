@@ -46,6 +46,8 @@ func InitRouter() *gin.Engine {
 	routerGroupApp.MessageRouter()
 	// articles api
 	routerGroupApp.ArticlesRouter()
+	// digg api
+	routerGroupApp.DiggRouter()
 
 	return router
 }

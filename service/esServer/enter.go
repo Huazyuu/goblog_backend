@@ -8,6 +8,7 @@ import (
 	"github.com/sirupsen/logrus"
 	"gvb_server/global"
 	"gvb_server/models"
+	"gvb_server/service/redisServer"
 	"strings"
 )
 
@@ -80,6 +81,12 @@ func CommList(option Option) (list []models.ArticleModel, count int, err error) 
 
 	count = int(res.Hits.TotalHits.Value) // 搜索到结果总条数
 	var demoList []models.ArticleModel
+
+	// 点赞数查询
+	diggInfo := redisServer.GetDiggInfo()
+	// look
+	lookInfo := redisServer.GetLookInfo()
+
 	for _, hit := range res.Hits.Hits {
 		var model models.ArticleModel
 		data, err := hit.Source.MarshalJSON()
@@ -97,6 +104,14 @@ func CommList(option Option) (list []models.ArticleModel, count int, err error) 
 			model.Title = title[0]
 		}
 		model.ID = hit.Id
+		// digg
+		digg := diggInfo[model.ID]
+		model.DiggCount += digg
+		// look
+		look := lookInfo[model.ID]
+		model.LookCount += look
+		// global.Logger.Debug(model.ID, model.LookCount)
+
 		demoList = append(demoList, model)
 	}
 	return demoList, count, nil
@@ -115,6 +130,7 @@ func CommDetail(id string) (model models.ArticleModel, err error) {
 		return
 	}
 	model.ID = res.Id
+	model.LookCount += redisServer.GetLook(model.ID)
 	return
 }
 
@@ -137,4 +153,13 @@ func CommDetailByKeyword(key string) (model models.ArticleModel, err error) {
 	}
 	model.ID = hit.Id
 	return
+}
+
+func ArticleUpdate(id string, data map[string]any) error {
+	_, err := global.ESClient.Update().
+		Index(models.ArticleModel{}.Index()).
+		Id(id).
+		Doc(data).
+		Do(context.Background())
+	return err
 }

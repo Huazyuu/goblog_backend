@@ -16,22 +16,28 @@ func ComList[T any](model T, option Option) (list []T, count int64, err error) {
 	// model 用来推断 T 的 类型
 	DB := global.DB
 	// console mysql log
+	// todo log console
 	if option.Debug {
 		DB = global.DB.Session(&gorm.Session{Logger: global.MySqlLog})
 	}
 	// sort
-	if option.Sort != "order" {
+	if option.Sort == "desc" {
 		option.Sort = "created_at desc" // 时间倒序
-	} else {
+	} else if option.Sort == "asc" {
 		option.Sort = "created_at asc"
+	} else {
+		option.Sort = "created_at desc"
 	}
 	// cnt
-	count = DB.Select("id").Find(&list).RowsAffected
+	query := DB.Where(model)
+	count = DB.Find(&list).RowsAffected
+	// 手动复位query
+	query = DB.Where(model)
 	// 分页
 	offset := (option.Page - 1) * option.Limit
 	if offset < 0 {
 		offset = 0
 	}
-	err = DB.Limit(option.Limit).Offset(offset).Order(option.Sort).Find(&list).Error
+	err = query.Limit(option.Limit).Offset(offset).Order(option.Sort).Find(&list).Error
 	return list, count, err
 }

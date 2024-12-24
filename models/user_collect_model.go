@@ -2,12 +2,11 @@ package models
 
 import "time"
 
-// UserCollectModel 自定义第三张表  记录用户什么时候收藏了什么文章
+// UserCollectModel 记录用户什么时候收藏了什么文章
 type UserCollectModel struct {
-	UserID uint `gorm:"primaryKey"`
-	// UserID -> UserModel(id)
+	ID        uint      `gorm:"primarykey" json:"id"`
+	UserID    uint      `json:"user_id"`
 	UserModel UserModel `gorm:"foreignKey:UserID"`
-	ArticleID uint      `gorm:"primaryKey"`
-	// ArticleModel ArticleModel `gorm:"foreignKey:ArticleID"`
+	ArticleID string    `gorm:"size:32"`
 	CreatedAt time.Time
 }

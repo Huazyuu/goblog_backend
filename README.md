@@ -13,5 +13,7 @@ MySQL
 Redis
 Elasticsearch
 Websocket
+docker
+
 
 Go (version >= 1.20)

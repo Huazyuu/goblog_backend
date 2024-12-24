@@ -21,6 +21,7 @@ func MakeMigration() {
 		&models.MessageModel{},
 		&models.TagModel{},
 		&models.UserModel{},
+		&models.UserCollectModel{},
 	)
 	if err != nil {
 		global.Logger.Error("[ error ] 生成数据库表结构失败")

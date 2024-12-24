@@ -3,13 +3,9 @@ package article_api
 import (
 	"github.com/gin-gonic/gin"
 	"gvb_server/models/res"
-
 	"gvb_server/service/esServer"
+	"gvb_server/service/redisServer"
 )
-
-type ESIDRequest struct {
-	ID string `json:"id" form:"id" binding:"required" uri:"id"`
-}
 
 func (ArticlesApi) ArticleDetailView(c *gin.Context) {
 	var cr ESIDRequest
@@ -18,11 +14,16 @@ func (ArticlesApi) ArticleDetailView(c *gin.Context) {
 		res.FailWithCode(res.ArgumentError, c)
 		return
 	}
+
+	// 增加look cnt
+	redisServer.Look(cr.ID)
+
 	model, err := esServer.CommDetail(cr.ID)
 	if err != nil {
 		res.FailWithMessage(err.Error(), c)
 		return
 	}
+
 	res.OkWithData(model, c)
 }
 
@@ -37,6 +38,7 @@ func (ArticlesApi) ArticleDetailByTitleView(c *gin.Context) {
 		res.FailWithCode(res.ArgumentError, c)
 		return
 	}
+
 	model, err := esServer.CommDetailByKeyword(cr.Title)
 	if err != nil {
 		res.FailWithMessage(err.Error(), c)

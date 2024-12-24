@@ -1,5 +1,5 @@
 .idea
-log
+log/myLog.log
 doc
 gvb_exe
 tmp

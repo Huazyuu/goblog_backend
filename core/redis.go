@@ -4,6 +4,7 @@ import (
 	"context"
 	"fmt"
 	"github.com/go-redis/redis"
+	"github.com/sirupsen/logrus"
 	"gvb_server/global"
 	"time"
 )
@@ -26,6 +27,6 @@ func InitRedisDB(db int) *redis.Client {
 		global.Logger.Errorf("连接redis失败%s", redisConf.GetAddr())
 		return nil
 	}
-	global.Logger.Infof(fmt.Sprintf("[%s] redis connects success", redisConf.GetAddr()))
+	logrus.Infof(fmt.Sprintf("[%s] redis connects success", redisConf.GetAddr()))
 	return rdb
 }
