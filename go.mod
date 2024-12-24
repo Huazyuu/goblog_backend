@@ -12,7 +12,6 @@ require (
 	github.com/gin-contrib/cors v1.7.1
 	github.com/gin-contrib/sessions v1.0.1
 	github.com/gin-gonic/gin v1.10.0
-	github.com/go-playground/assert/v2 v2.2.0
 	github.com/go-playground/validator/v10 v10.20.0
 	github.com/go-redis/redis v6.15.9+incompatible
 	github.com/liu-cn/json-filter v0.0.0-20241117044243-8d36aa69a37b
