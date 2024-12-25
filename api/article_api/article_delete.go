@@ -8,6 +8,7 @@ import (
 	"gvb_server/global"
 	"gvb_server/models"
 	"gvb_server/models/res"
+	"gvb_server/service/esServer"
 )
 
 type IDListRequest struct {
@@ -28,6 +29,8 @@ func (ArticlesApi) ArticleRemoveView(c *gin.Context) {
 	for _, id := range cr.IDList {
 		req := elastic.NewBulkDeleteRequest().Id(id)
 		bulkService.Add(req)
+		// full text
+		go esServer.DeleteFullTextByArticleID(id)
 	}
 	result, err := bulkService.Do(context.Background())
 	if err != nil {

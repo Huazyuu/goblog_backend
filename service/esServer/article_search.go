@@ -12,6 +12,15 @@ import (
 	"strings"
 )
 
+func ArticleUpdate(id string, data map[string]any) error {
+	_, err := global.ESClient.Update().
+		Index(models.ArticleModel{}.Index()).
+		Id(id).
+		Doc(data).
+		Do(context.Background())
+	return err
+}
+
 func CommList(option Option) (list []models.ArticleModel, count int, err error) {
 	boolSearch := elastic.NewBoolQuery()
 
@@ -137,13 +146,4 @@ func CommDetailByKeyword(key string) (model models.ArticleModel, err error) {
 	}
 	model.ID = hit.Id
 	return
-}
-
-func ArticleUpdate(id string, data map[string]any) error {
-	_, err := global.ESClient.Update().
-		Index(models.ArticleModel{}.Index()).
-		Id(id).
-		Doc(data).
-		Do(context.Background())
-	return err
 }

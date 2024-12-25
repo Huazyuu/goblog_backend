@@ -11,7 +11,8 @@ import (
 type FullTextModel struct {
 	// structs struct 转 map 后的key
 	ID    string `structs:"id" json:"id"`       // es的id
-	Title string `structs:"title" json:"title"` // 文章标题
+	Key   string `structs:"key" json:"key"`     // 文章关联的id
+	Title string `structs:"title" json:"title"` // 文章标题 text
 	Slug  string `structs:"slug" json:"slug"`   // 包含文章的id 的跳转地址
 	Body  string `structs:"body" json:"body"`   // 文章内容
 }

@@ -6,6 +6,9 @@
   },
   "mappings": {
     "properties": {
+      "key": {
+        "type": "keyword"
+      },
       "title": {
         "type": "text"
       },

@@ -1,12 +1,17 @@
 package esServer
 
 import (
+	"context"
 	"github.com/PuerkitoBio/goquery"
+	"github.com/olivere/elastic/v7"
 	"github.com/russross/blackfriday"
+	"gvb_server/global"
+	"gvb_server/models"
 	"strings"
 )
 
 type SearchData struct {
+	Key   string `json:"key"`
 	Slug  string `json:"slug"`  // 包含文章的id 的跳转地址
 	Title string `json:"title"` // 标题
 	Body  string `json:"body"`  // 正文
@@ -46,6 +51,7 @@ func GetSearchIndexDataByContent(id, title, content string) (searchDataList []Se
 			Title: headList[i],
 			Body:  bodyList[i],
 			Slug:  id + getSlug(headList[i]),
+			Key:   id,
 		})
 	}
 	return searchDataList
@@ -69,4 +75,35 @@ func getBody(body string) string {
 // getSlug 生成跳转地址
 func getSlug(slug string) string {
 	return "#" + slug
+}
+
+// ASyncArticleFullText 异步同步全文搜索
+func ASyncArticleFullText(id, title, content string) {
+	indexList := GetSearchIndexDataByContent(id, title, content)
+	/*批量添加
+	遍历 indexList，即需要添加到 Elasticsearch 的数据。
+	elastic.NewBulkIndexRequest()每一条数据都会生成一个 BulkIndexRequest：
+	.Index(models.FullTextModel{}.Index())：指定写入的索引（类似数据库中的表名）。
+	.Doc(indexData)：指定要写入的数据内容（通常是 JSON 格式的文档）。
+	bulk.Add(req)：将生成的 BulkIndexRequest 添加到 Bulk 请求中。*/
+	bulk := global.ESClient.Bulk()
+	for _, indexData := range indexList {
+		req := elastic.NewBulkIndexRequest().Index(models.FullTextModel{}.Index()).Doc(indexData)
+		bulk.Add(req)
+	}
+	result, err := bulk.Do(context.Background())
+	if err != nil {
+		global.Logger.Error(err.Error())
+		return
+	}
+	global.Logger.Infof("%s 添加成功,共 %d条", title, len(result.Succeeded()))
+}
+
+// DeleteFullTextByArticleID 删除全文搜索数据
+func DeleteFullTextByArticleID(id string) {
+	boolSearch := elastic.NewTermQuery("key", id)
+	res, _ := global.ESClient.
+		DeleteByQuery().Index(models.FullTextModel{}.Index()).
+		Query(boolSearch).Do(context.Background())
+	global.Logger.Infof("成功删除 %d 条记录", res.Deleted)
 }

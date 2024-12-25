@@ -9,6 +9,7 @@ import (
 	"gvb_server/models"
 	"gvb_server/models/ctype"
 	"gvb_server/models/res"
+	"gvb_server/service/esServer"
 	"gvb_server/utils/jwt"
 	"math/rand"
 	"strings"
@@ -124,5 +125,6 @@ func (ArticlesApi) ArticleCreateView(c *gin.Context) {
 		res.FailWithMessage(err.Error(), c)
 		return
 	}
+	go esServer.ASyncArticleFullText(article.ID, article.Title, article.Content)
 	res.OkWithMessage("文章发布成功", c)
 }

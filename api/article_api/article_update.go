@@ -56,13 +56,6 @@ func (ArticlesApi) ArticleUpdateView(c *gin.Context) {
 		Tags:      cr.Tags,
 	}
 
-	err = article.GetDataByID(cr.ID)
-	if err != nil {
-		global.Logger.Error(err)
-		res.FailWithMessage("文章不存在", c)
-		return
-	}
-
 	// structs 转 maps
 	maps := structs.Map(&article)
 	var dataMap = make(map[string]any)
@@ -93,11 +86,27 @@ func (ArticlesApi) ArticleUpdateView(c *gin.Context) {
 		dataMap[key] = v
 	}
 
-	err = esServer.ArticleUpdate(cr.ID, maps)
+	err = article.GetDataByID(cr.ID)
+	if err != nil {
+		global.Logger.Error(err)
+		res.FailWithMessage("文章不存在", c)
+		return
+	}
+
+	// 更新
+	err = esServer.ArticleUpdate(cr.ID, dataMap)
 	if err != nil {
 		global.Logger.Error(err)
 		res.FailWithMessage("文章更新失败", c)
 		return
 	}
+
+	// 更新成功 同步数据到es
+	newArticle, _ := esServer.CommDetail(cr.ID)
+	if article.Content != newArticle.Content || article.Title != newArticle.Title {
+		esServer.DeleteFullTextByArticleID(cr.ID)
+		esServer.ASyncArticleFullText(cr.ID, article.Title, newArticle.Content)
+	}
+
 	res.OkWithMessage("更新成功", c)
 }

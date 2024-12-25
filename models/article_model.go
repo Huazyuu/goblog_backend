@@ -176,7 +176,7 @@ func (a ArticleModel) RemoveIndex() error {
 }
 
 // Create 添加的方法
-func (a ArticleModel) Create() (err error) {
+func (a *ArticleModel) Create() (err error) {
 	indexResponse, err := global.ESClient.Index().
 		Index(a.Index()).
 		BodyJson(a).
