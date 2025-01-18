@@ -19,7 +19,7 @@ func (DiggApi) DiggArticleView(c *gin.Context) {
 	}
 	// 对长度校验
 	// 查es
-	err = redisServer.Digg(cr.ID)
+	err = redisServer.NewDigg().Set(cr.ID)
 	if err != nil {
 		res.FailWithError(err, &cr, c)
 	}

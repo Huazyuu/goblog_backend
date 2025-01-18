@@ -48,6 +48,8 @@ func InitRouter() *gin.Engine {
 	routerGroupApp.ArticlesRouter()
 	// digg api
 	routerGroupApp.DiggRouter()
+	// comment api
+	routerGroupApp.CommentRouter()
 
 	return router
 }

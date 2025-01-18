@@ -29,8 +29,8 @@ func main() {
 		return
 	}
 
-	diggInfo := redisServer.GetDiggInfo()
-	lookInfo := redisServer.GetLookInfo()
+	diggInfo := redisServer.NewDigg().GetInfo()
+	lookInfo := redisServer.NewArticleLook().GetInfo()
 
 	for _, hit := range result.Hits.Hits {
 		var article models.ArticleModel
@@ -61,6 +61,6 @@ func main() {
 		}
 		global.Logger.Info(article.Title, "点赞数浏览量同步成功, 点赞数", newDigg, "\t浏览量", article.LookCount)
 	}
-	redisServer.DiggClear()
-	redisServer.LookClear()
+	redisServer.NewDigg().Clear()
+	redisServer.NewArticleLook().Clear()
 }

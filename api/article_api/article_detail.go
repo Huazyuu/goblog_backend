@@ -16,7 +16,7 @@ func (ArticlesApi) ArticleDetailView(c *gin.Context) {
 	}
 
 	// 增加look cnt
-	redisServer.Look(cr.ID)
+	_ = redisServer.NewArticleLook().Set(cr.ID)
 
 	model, err := esServer.CommDetail(cr.ID)
 	if err != nil {

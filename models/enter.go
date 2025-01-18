@@ -3,9 +3,9 @@ package models
 import "time"
 
 type MODEL struct {
-	ID        uint      `gorm:"primarykey" json:"id"`
-	CreatedAt time.Time `json:"created-at"`
-	UpdatedAt time.Time `json:"Updated-at"`
+	ID        uint      `gorm:"primarykey,select($any)" json:"id"`
+	CreatedAt time.Time `json:"created-at,select($any)"`
+	UpdatedAt time.Time `json:"updated-at,select($any)"`
 }
 
 // PageInfo 分页Page

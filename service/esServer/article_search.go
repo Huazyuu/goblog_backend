@@ -76,9 +76,11 @@ func CommList(option Option) (list []models.ArticleModel, count int, err error) 
 	var demoList []models.ArticleModel
 
 	// 点赞数查询
-	diggInfo := redisServer.GetDiggInfo()
+	diggInfo := redisServer.NewDigg().GetInfo()
 	// look
-	lookInfo := redisServer.GetLookInfo()
+	lookInfo := redisServer.NewArticleLook().GetInfo()
+	// comment count
+	commentInfo := redisServer.NewCommentCount().GetInfo()
 
 	for _, hit := range res.Hits.Hits {
 		var model models.ArticleModel
@@ -97,13 +99,13 @@ func CommList(option Option) (list []models.ArticleModel, count int, err error) 
 			model.Title = title[0]
 		}
 		model.ID = hit.Id
-		// digg
+		// digg look comment数量
 		digg := diggInfo[model.ID]
-		model.DiggCount += digg
-		// look
 		look := lookInfo[model.ID]
+		comment := commentInfo[model.ID]
+		model.DiggCount += digg
 		model.LookCount += look
-		// global.Logger.Debug(model.ID, model.LookCount)
+		model.CommentCount += comment
 
 		demoList = append(demoList, model)
 	}
@@ -123,7 +125,7 @@ func CommDetail(id string) (model models.ArticleModel, err error) {
 		return
 	}
 	model.ID = res.Id
-	model.LookCount += redisServer.GetLook(model.ID)
+	model.LookCount += redisServer.NewArticleLook().Get(model.ID)
 	return
 }
 
