@@ -30,7 +30,7 @@ func ComList[T any](model T, option Option) (list []T, count int64, err error) {
 	}
 	// cnt
 	query := DB.Where(model)
-	count = DB.Find(&list).RowsAffected
+	count = query.Find(&list).RowsAffected
 	// 手动复位query
 	query = DB.Where(model)
 	// 分页

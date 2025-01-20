@@ -50,6 +50,8 @@ func InitRouter() *gin.Engine {
 	routerGroupApp.DiggRouter()
 	// comment api
 	routerGroupApp.CommentRouter()
-
+	// todo news api
+	// chat api
+	routerGroupApp.ChatRouter()
 	return router
 }
