@@ -53,5 +53,9 @@ func InitRouter() *gin.Engine {
 	// todo news api
 	// chat api
 	routerGroupApp.ChatRouter()
+	// log api
+	routerGroupApp.LogRouter()
+	// date api
+	routerGroupApp.DataRouter()
 	return router
 }

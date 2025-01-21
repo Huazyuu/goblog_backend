@@ -29,7 +29,7 @@ func (MenusApi) MenuListView(c *gin.Context) {
 	//  SELECT * FROM `banner_models` WHERE `banner_models`.`id` IN (3,2,1)
 	global.DB.Preload("BannerModel").Order("sort desc").Find(&menuBanners, "menu_id in ?", menuIDList)
 	// resp
-	var menus []MenuResponse
+	var menus = make([]MenuResponse, 0)
 	for _, model := range menuList {
 		// model就是一个菜单
 		var banners []Banner

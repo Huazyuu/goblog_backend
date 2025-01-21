@@ -7,13 +7,11 @@ import (
 	"gorm.io/gorm"
 	"gorm.io/gorm/logger"
 	"gvb_server/global"
-	"log"
 	"time"
 )
 
 func InitGorm() *gorm.DB {
 	if global.Config.Mysql.Host == "" {
-		log.Println()
 		logrus.Warnln("未配置mysql 取消gorm连接")
 		return nil
 	}
