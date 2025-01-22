@@ -46,8 +46,6 @@ func InitRouter() *gin.Engine {
 	routerGroupApp.MessageRouter()
 	// articles api
 	routerGroupApp.ArticlesRouter()
-	// digg api
-	routerGroupApp.DiggRouter()
 	// comment api
 	routerGroupApp.CommentRouter()
 	// todo news api

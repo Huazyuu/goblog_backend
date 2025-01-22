@@ -7,6 +7,14 @@ import (
 	"gvb_server/service/redisServer"
 )
 
+// ArticleDetailView 文章详情
+// @Tags 文章管理
+// @Summary 文章详情
+// @Description 文章详情
+// @Param id path string  true  "id"
+// @Router /api/articles/{id} [get]
+// @Produce json
+// @Success 200 {object} res.Response{data=models.ArticleModel}
 func (ArticlesApi) ArticleDetailView(c *gin.Context) {
 	var cr ESIDRequest
 	err := c.ShouldBindUri(&cr)

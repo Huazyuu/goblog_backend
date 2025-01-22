@@ -9,6 +9,15 @@ import (
 	"gvb_server/models/res"
 )
 
+// MenuRemoveView 删除菜单
+// @Tags 菜单管理
+// @Summary 删除菜单
+// @Description 删除菜单
+// @Param data body models.RemoveRequest  true  "查询参数"
+// @Param token header string  true  "token"
+// @Router /api/menus [delete]
+// @Produce json
+// @Success 200 {object} res.Response{}
 func (MenusApi) MenuRemoveView(c *gin.Context) {
 	var cr models.RemoveRequest
 	err := c.ShouldBind(&cr)

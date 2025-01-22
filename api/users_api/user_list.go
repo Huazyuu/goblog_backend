@@ -10,6 +10,15 @@ import (
 	"gvb_server/utils/jwt"
 )
 
+// UserListView 用户列表
+// @Tags 用户管理
+// @Summary 用户列表
+// @Description 用户列表
+// @Param data query models.PageInfo  false  "查询参数"
+// @Param token header string  true  "token"
+// @Router /api/users [get]
+// @Produce json
+// @Success 200 {object} res.Response{data=res.ListResponse[models.UserModel]}
 func (UsersApi) UserListView(c *gin.Context) {
 	_claims, _ := c.Get("claims")
 	claims := _claims.(*jwt.CustomClaims)

@@ -33,8 +33,15 @@ type TagsType struct {
 	} `json:"buckets"`
 }
 
+// ArticleTagListView 标签文章列表
+// @Tags 文章管理
+// @Summary 标签文章列表
+// @Description 标签文章列表
+// @Param data query models.PageInfo   false  "表示多个参数"
+// @Router /api/articles/tags [get]
+// @Produce json
+// @Success 200 {object} res.Response{data=res.ListResponse[TagsResponse]}
 func (ArticlesApi) ArticleTagListView(c *gin.Context) {
-
 	// 分页处理
 	var cr models.PageInfo
 	_ = c.ShouldBindQuery(&cr)

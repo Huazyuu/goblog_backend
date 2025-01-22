@@ -8,6 +8,16 @@ import (
 	"gvb_server/models/res"
 )
 
+// SettingsInfoUpdateView 修改某一项的配置信
+// SettingsInfoUpdateView 修改某一项的配置信息
+// @Tags 系统管理
+// @Summary 修改某一项的配置信息
+// @Description 修改某一项的配置信息
+// @Param name path int  true  "name"
+// @Router /api/settings/{name} [put]
+// @Param token header string  true  "token"
+// @Produce json
+// @Success 200 {object} res.Response{}
 func (settingsApi *SettingsApi) SettingsInfoUpdateView(c *gin.Context) {
 
 	var cr SettingUri

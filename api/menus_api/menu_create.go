@@ -24,6 +24,16 @@ type MenuRequest struct {
 	ImageSortList []ImageSort `json:"image_sort_list" structs:"-"`                          // 具体图片的顺序
 }
 
+// MenuCreateView 发布菜
+// MenuCreateView 发布菜单
+// @Tags 菜单管理
+// @Summary 发布菜单
+// @Description 发布菜单
+// @Param data body MenuRequest  true  "查询参数"
+// @Param token header string  true  "token"
+// @Router /api/menus [post]
+// @Produce json
+// @Success 200 {object} res.Response{}
 func (MenusApi) MenuCreateView(c *gin.Context) {
 	var cr MenuRequest
 	err := c.ShouldBindJSON(&cr)

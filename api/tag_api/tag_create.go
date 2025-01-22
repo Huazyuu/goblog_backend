@@ -13,6 +13,16 @@ type TagRequest struct {
 	Title string `json:"title" binding:"required" msg:"请输入标题" structs:"title"` // 显示的标题
 }
 
+// TagCreateView 发布标
+// TagCreateView 发布标签
+// @Tags 标签管理
+// @Summary 发布标签
+// @Description 发布标签
+// @Param data body TagRequest  true  "查询参数"
+// @Param token header string  true  "token"
+// @Router /api/tags [post]
+// @Produce json
+// @Success 200 {object} res.Response{}
 func (TagApi) TagCreateView(c *gin.Context) {
 	var cr TagRequest
 	err := c.ShouldBindJSON(&cr)

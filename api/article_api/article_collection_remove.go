@@ -17,7 +17,15 @@ type ESIDListRequest struct {
 	IDList []string `json:"id_list"`
 }
 
-// ArticleCollBatchRemoveView 批量移除
+// ArticleCollBatchRemoveView 用户取消收藏文章
+// @Tags 文章管理
+// @Summary 用户取消收藏文章
+// @Description 用户取消收藏文章
+// @Param data body models.ESIDListRequest   true  "表示多个参数"
+// @Param token header string  true  "token"
+// @Router /api/articles/collects [delete]
+// @Produce json
+// @Success 200 {object} res.Response{}
 func (ArticlesApi) ArticleCollBatchRemoveView(c *gin.Context) {
 	var cr ESIDListRequest
 	err := c.ShouldBindJSON(&cr)

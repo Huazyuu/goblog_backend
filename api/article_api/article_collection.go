@@ -9,6 +9,15 @@ import (
 	"gvb_server/utils/jwt"
 )
 
+// ArticleCollectionCreateView 用户收藏文章，或取消收藏
+// @Tags 文章管理
+// @Summary 用户收藏文章，或取消收藏
+// @Description 用户收藏文章，或取消收藏
+// @Param data body models.ESIDRequest   true  "表示多个参数"
+// @Param token header string  true  "token"
+// @Router /api/articles/collects [post]
+// @Produce json
+// @Success 200 {object} res.Response{}
 func (ArticlesApi) ArticleCollectionCreateView(c *gin.Context) {
 	var cr ESIDRequest
 	err := c.ShouldBindJSON(&cr)

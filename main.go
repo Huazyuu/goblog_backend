@@ -6,6 +6,7 @@ import (
 	"gvb_server/flag"
 	"gvb_server/global"
 	"gvb_server/routers"
+	"gvb_server/utils"
 )
 
 // swagger api_doc
@@ -42,8 +43,8 @@ func main() {
 
 	// router
 	router := routers.InitRouter()
-	addr := global.Config.System.Addr()
-	global.Logger.Infof("[gvb]  backend 运行在 %s", addr)
+	// run
+	utils.PrintSystemInfo()
 	err := router.Run(global.Config.System.Addr())
 	if err != nil {
 		global.Logger.Error(err.Error())

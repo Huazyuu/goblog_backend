@@ -30,6 +30,8 @@ func (router *RouterGroup) ArticlesRouter() {
 	router.DELETE("/articles/collects", middleware.JwtAuth(), articlesApi.ArticleCollBatchRemoveView)
 	// 全文搜索
 	router.GET("/articles/text", articlesApi.FullTextSearchView)
+	// 给文章点赞
+	router.POST("/digg/article", articlesApi.ArticleDiggView)
 	// 文章id查询detail
 	router.GET("/articles/:id", articlesApi.ArticleDetailView)
 }

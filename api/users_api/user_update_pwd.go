@@ -14,6 +14,15 @@ type UserUpdatePwdReq struct {
 	OldPwd string `json:"old_pwd"`
 }
 
+// UserUpdatePasswordView 修改登录人的密码
+// @Tags 用户管理
+// @Summary 修改登录人的密码
+// @Description 修改登录人的密码
+// @Param data body UpdatePasswordRequest  true  "查询参数"
+// @Param token header string  true  "token"
+// @Router /api/user_password [put]
+// @Produce json
+// @Success 200 {object} res.Response{}
 func (UsersApi) UserUpdatePasswordView(c *gin.Context) {
 	_claims, _ := c.Get("claims")
 	claims := _claims.(*jwt.CustomClaims)

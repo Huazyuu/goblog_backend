@@ -28,6 +28,15 @@ type ArticleRequest struct {
 	Tags     ctype.Array `json:"tags"`                                    // 文章标签
 }
 
+// ArticleCreateView 发布文章
+// @Tags 文章管理
+// @Summary 发布文章
+// @Description 发布文章
+// @Param data body ArticleRequest   true  "表示多个参数"
+// @Param token header string  true  "token"
+// @Router /api/articles [post]
+// @Produce json
+// @Success 200 {object} res.Response{}
 func (ArticlesApi) ArticleCreateView(c *gin.Context) {
 	var cr ArticleRequest
 	err := c.ShouldBindJSON(&cr)

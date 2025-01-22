@@ -7,7 +7,16 @@ import (
 	"gvb_server/models/res"
 )
 
+// MessageCreateView 发布消
 // MessageCreateView 发布消息
+// @Tags 消息管理
+// @Summary 发布消息
+// @Description 发布消息
+// @Param data body MessageRequest  true  "查询参数"
+// @Param token header string  true  "token"
+// @Router /api/messages [post]
+// @Produce json
+// @Success 200 {object} res.Response{}
 func (MessageApi) MessageCreateView(c *gin.Context) {
 	var cr MessageRequest
 	err := c.ShouldBindJSON(&cr)

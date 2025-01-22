@@ -10,6 +10,14 @@ import (
 	"gvb_server/models/res"
 )
 
+// FullTextSearchView 全文搜索列表
+// @Tags 文章管理
+// @Summary 全文搜索列表
+// @Description 全文搜索列表
+// @Param data query models.PageInfo   false  "表示多个参数"
+// @Router /api/articles/text [get]
+// @Produce json
+// @Success 200 {object} res.Response{data=res.ListResponse[models.FullTextModel]}
 func (ArticlesApi) FullTextSearchView(c *gin.Context) {
 	var cr models.PageInfo
 	_ = c.ShouldBindQuery(&cr)

@@ -11,6 +11,15 @@ import (
 	"gvb_server/utils"
 )
 
+// CommentRemoveView 删除评论
+// @Tags 评论管理
+// @Summary 删除评论
+// @Description 删除评论
+// @Param token header string  true  "token"
+// @Param id path int  true  "id"
+// @Router /api/comments/{id} [delete]
+// @Produce json
+// @Success 200 {object} res.Response{}
 func (CommentApi) CommentRemoveView(c *gin.Context) {
 	var cr CommentIDRequest
 	err := c.ShouldBindUri(&cr)

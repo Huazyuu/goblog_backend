@@ -9,6 +9,15 @@ import (
 	"gvb_server/models/res"
 )
 
+// UserRemoveView 删除用户
+// @Tags 用户管理
+// @Summary 删除用户
+// @Description 删除用户
+// @Param data body models.RemoveRequest  true  "查询参数"
+// @Param token header string  true  "token"
+// @Router /api/users [delete]
+// @Produce json
+// @Success 200 {object} res.Response{}
 func (UsersApi) UserRemoveView(c *gin.Context) {
 	var cr models.RemoveRequest
 	err := c.ShouldBindJSON(&cr)

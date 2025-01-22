@@ -18,7 +18,13 @@ type DateCountResponse struct {
 	SignCount  []int    `json:"sign_count"`
 }
 
-// SevenLoginView 七天登录用户统计
+// SevenLoginView 七日登录，注册数据
+// @Tags 数据管理
+// @Summary 七日登录，注册数据
+// @Description 七日登录，注册数据
+// @Router /api/data_login [get]
+// @Produce json
+// @Success 200 {object} res.Response{data=[]DateCountResponse}
 func (DataApi) SevenLoginView(c *gin.Context) {
 	var loginDateCount, signDateCount []DateCount
 	// k-v: data count

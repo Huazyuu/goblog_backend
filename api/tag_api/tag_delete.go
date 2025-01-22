@@ -8,6 +8,15 @@ import (
 	"gvb_server/models/res"
 )
 
+// TagRemoveView 标签删除
+// @Tags 标签管理
+// @Summary 标签删除
+// @Description 标签删除
+// @Param data body models.RemoveRequest  true  "查询参数"
+// @Param token header string  true  "token"
+// @Router /api/tags [delete]
+// @Produce json
+// @Success 200 {object} res.Response{}
 func (TagApi) TagRemoveView(c *gin.Context) {
 	var cr models.RemoveRequest
 	err := c.ShouldBindJSON(&cr)

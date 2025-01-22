@@ -28,6 +28,13 @@ type BucketType struct {
 // dataCount key time value cnt
 var dateCount = map[string]int{}
 
+// ArticleCalendarView 文章日历
+// @Tags 文章管理
+// @Summary 文章日历
+// @Description 文章日历
+// @Router /api/articles/calendar [get]
+// @Produce json
+// @Success 200 {object} res.Response{data=[]CalendarResponse}
 func (ArticlesApi) ArticleCalendarView(c *gin.Context) {
 	// 时间聚合
 	agg := elastic.NewDateHistogramAggregation().Field("created_at").CalendarInterval("day")

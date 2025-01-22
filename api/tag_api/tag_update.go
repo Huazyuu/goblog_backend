@@ -8,6 +8,16 @@ import (
 	"gvb_server/models/res"
 )
 
+// TagUpdateView 更新标签
+// @Tags 标签管理
+// @Summary 更新标签
+// @Description 更新标签
+// @Param data body TagRequest  true "查询参数"
+// @Param token header string  true  "token"
+// @Param id path int  true  "id"
+// @Router /api/tags/{id} [put]
+// @Produce json
+// @Success 200 {object} res.Response{}
 func (TagApi) TagUpdateView(c *gin.Context) {
 	id := c.Param("id")
 	var cr TagRequest

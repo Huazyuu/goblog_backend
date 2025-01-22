@@ -21,6 +21,16 @@ type BindEmailRequest struct {
 
 var emailFirstReq string
 
+// UserBindEmailView 用户绑定邮
+// UserBindEmailView 用户绑定邮箱
+// @Tags 用户管理
+// @Summary 用户绑定邮箱
+// @Description 用户绑定邮箱
+// @Param data body BindEmailRequest  true  "查询参数"
+// @Param token header string  true  "token"
+// @Router /api/user_bind_email [post]
+// @Produce json
+// @Success 200 {object} res.Response{}
 func (UsersApi) UserBindEmailView(c *gin.Context) {
 	_claims, _ := c.Get("claims")
 	claims := _claims.(*jwt.CustomClaims)

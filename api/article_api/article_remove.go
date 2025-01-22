@@ -15,6 +15,15 @@ type IDListRequest struct {
 	IDList []string `json:"id_list"`
 }
 
+// ArticleRemoveView 删除文章
+// @Tags 文章管理
+// @Summary 删除文章
+// @Description 删除文章
+// @Param data body IDListRequest   true  "表示多个参数"
+// @Param token header string  true  "token"
+// @Router /api/articles [delete]
+// @Produce json
+// @Success 200 {object} res.Response{}
 func (ArticlesApi) ArticleRemoveView(c *gin.Context) {
 	var cr IDListRequest
 	err := c.ShouldBindJSON(&cr)

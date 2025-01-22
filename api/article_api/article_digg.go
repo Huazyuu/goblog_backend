@@ -1,4 +1,4 @@
-package digg_api
+package article_api
 
 import (
 	"github.com/gin-gonic/gin"
@@ -6,11 +6,15 @@ import (
 	"gvb_server/service/redisServer"
 )
 
-type ESIDRequest struct {
-	ID string `json:"id" form:"id" binding:"required" uri:"id"`
-}
-
-func (DiggApi) DiggArticleView(c *gin.Context) {
+// ArticleDiggView 文章点赞
+// @Tags 文章管理
+// @Summary 文章点赞
+// @Description 文章点赞
+// @Param data body models.ESIDRequest   true  "表示多个参数"
+// @Router /api/articles/digg [post]
+// @Produce json
+// @Success 200 {object} res.Response{}
+func (ArticlesApi) ArticleDiggView(c *gin.Context) {
 	var cr ESIDRequest
 	err := c.ShouldBindJSON(&cr)
 	if err != nil {

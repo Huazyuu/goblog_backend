@@ -10,6 +10,15 @@ type SettingUri struct {
 	Name string `uri:"name"`
 }
 
+// SettingsInfoView 显示某一项的配置信息
+// @Tags 系统管理
+// @Summary 显示某一项的配置信息
+// @Description 显示某一项的配置信息  site email qq qiniu jwt chat_group
+// @Param name path string  true  "name"
+// @Param token header string  true  "token"
+// @Router /api/settings/{name} [get]
+// @Produce json
+// @Success 200 {object} res.Response{}
 func (settingsApi *SettingsApi) SettingsInfoView(c *gin.Context) {
 
 	var cr SettingUri
