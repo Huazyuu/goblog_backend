@@ -25,7 +25,7 @@ type CollectionsResponse struct {
 // @Param token header string  true  "token"
 // @Router /api/articles/collects [get]
 // @Produce json
-// @Success 200 {object} res.Response{data=res.ListResponse[CollResponse]}
+// @Success 200 {object} res.Response{data=res.ListResponse[CollectionsResponse]}
 func (ArticlesApi) ArticleCollectionListView(c *gin.Context) {
 	var cr models.PageInfo
 	_ = c.ShouldBindQuery(&cr)

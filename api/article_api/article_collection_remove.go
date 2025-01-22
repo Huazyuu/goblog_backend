@@ -21,7 +21,7 @@ type ESIDListRequest struct {
 // @Tags 文章管理
 // @Summary 用户取消收藏文章
 // @Description 用户取消收藏文章
-// @Param data body models.ESIDListRequest   true  "表示多个参数"
+// @Param data body ESIDListRequest   true  "表示多个参数"
 // @Param token header string  true  "token"
 // @Router /api/articles/collects [delete]
 // @Produce json
