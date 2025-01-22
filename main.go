@@ -24,6 +24,10 @@ func main() {
 	// gorm
 	global.DB = core.InitGorm()
 
+	// addr ip
+	global.AddrDB = core.InitAddrDB()
+	defer global.AddrDB.Close()
+
 	// flag
 	option := flag.Parse()
 	if flag.IsWebStop(option) {

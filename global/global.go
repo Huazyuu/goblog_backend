@@ -1,6 +1,7 @@
 package global
 
 import (
+	"github.com/cc14514/go-geoip2"
 	"github.com/go-redis/redis"
 	"github.com/olivere/elastic/v7"
 	"github.com/sirupsen/logrus"
@@ -10,10 +11,11 @@ import (
 )
 
 var (
-	Config *config.Config
-	DB     *gorm.DB
+	Config   *config.Config
+	DB       *gorm.DB
 	Logger   *logrus.Logger
 	MySqlLog logger.Interface
-	Redis *redis.Client
+	Redis    *redis.Client
 	ESClient *elastic.Client
+	AddrDB   *geoip2.DBReader
 )

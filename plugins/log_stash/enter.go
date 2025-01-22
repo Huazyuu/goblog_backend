@@ -4,6 +4,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/sirupsen/logrus"
 	"gvb_server/global"
+	"gvb_server/utils"
 	"gvb_server/utils/jwt"
 )
 
@@ -19,10 +20,10 @@ func New(ip string, token string) *Log {
 	if err == nil {
 		uid = claims.UserID
 	}
-	// fmt.Println(uid)
+	addr := utils.GetAddr(ip)
 	return &Log{
 		ip,
-		"内网",
+		addr,
 		uid,
 	}
 }

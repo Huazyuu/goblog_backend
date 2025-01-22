@@ -5,6 +5,7 @@ import (
 	"gvb_server/global"
 	"gvb_server/models"
 	"gvb_server/models/ctype"
+	"gvb_server/utils"
 	"gvb_server/utils/pwd"
 )
 
@@ -25,7 +26,7 @@ func (UserService) CreateUser(username, nickname, password string, role ctype.Ro
 		Avatar:     avatar,
 		Email:      email,
 		IP:         ip,
-		Addr:       "内网地址",
+		Addr:       utils.GetAddr(ip),
 		Role:       role,
 		SignStatus: ctype.SignEmail,
 	}).Error

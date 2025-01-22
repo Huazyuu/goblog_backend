@@ -8,6 +8,7 @@ import (
 	"gvb_server/global"
 	"gvb_server/models"
 	"gvb_server/models/res"
+	"gvb_server/utils"
 	randomname "gvb_server/utils/random_name"
 	"net/http"
 	"strings"
@@ -154,6 +155,6 @@ func sendMsg(_addr string, response GroupResponse) {
 
 func getIPAndAddr(_addr string) (ip string, addr string) {
 	addrList := strings.Split(_addr, ":")
-	addr = "内网"
+	addr = utils.GetAddr(ip)
 	return addrList[0], addr
 }
