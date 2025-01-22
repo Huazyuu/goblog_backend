@@ -1,6 +1,7 @@
 
 # Blog Backend
 
+[Archived please go to v2](https://github.com/Huazyuu/goblog_v2)
 ---
 
 **This project is a blogging app built using the `Gin` framework and a few other technologies.**

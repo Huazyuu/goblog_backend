@@ -21,7 +21,7 @@ type ImageUpdateRequest struct {
 // @Router /api/images [put]
 // @Produce json
 // @Success 200 {object} res.Response{}
-func (imagesApi *ImagesApi) ImageUpdateView(c *gin.Context) {
+func (*ImagesApi) ImageUpdateView(c *gin.Context) {
 	var cr ImageUpdateRequest
 	err := c.ShouldBindJSON(&cr)
 	if err != nil {

@@ -10,7 +10,7 @@ import (
 // @Tags 文章管理
 // @Summary 文章点赞
 // @Description 文章点赞
-// @Param data body models.ESIDRequest   true  "表示多个参数"
+// @Param data body ESIDRequest   true  "表示多个参数"
 // @Router /api/articles/digg [post]
 // @Produce json
 // @Success 200 {object} res.Response{}

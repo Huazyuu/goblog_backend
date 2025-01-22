@@ -20,7 +20,7 @@ import (
 // @Router /api/images [post]
 // @Produce json
 // @Success 200 {object} res.Response{}
-func (imagesApi *ImagesApi) ImageUploadView(c *gin.Context) {
+func (*ImagesApi) ImageUploadView(c *gin.Context) {
 	form, err := c.MultipartForm()
 	if err != nil {
 		res.FailWithMessage(err.Error(), c)

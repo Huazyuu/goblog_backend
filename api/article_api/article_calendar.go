@@ -34,7 +34,7 @@ var dateCount = map[string]int{}
 // @Description 文章日历
 // @Router /api/articles/calendar [get]
 // @Produce json
-// @Success 200 {object} res.Response{data=[]CalendarResponse}
+// @Success 200 {object} res.Response{data=[]CalendarResp}
 func (ArticlesApi) ArticleCalendarView(c *gin.Context) {
 	// 时间聚合
 	agg := elastic.NewDateHistogramAggregation().Field("created_at").CalendarInterval("day")

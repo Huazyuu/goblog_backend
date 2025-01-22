@@ -14,8 +14,12 @@ func (router *RouterGroup) ArticlesRouter() {
 	router.GET("/articles", articlesApi.ArticleListView)
 	// 文章详细
 	router.GET("/articles/detail", articlesApi.ArticleDetailByTitleView)
+	// 文章内容
+	router.GET("articles/content/:id", articlesApi.ArticleContentByIDView)
 	// 文章发布时间列表
 	router.GET("/articles/calendar", articlesApi.ArticleCalendarView)
+	// 文章分类列表
+	router.GET("/categorys", articlesApi.ArticleCategoryListView)
 	// 文章tag列表
 	router.GET("/articles/tags", articlesApi.ArticleTagListView)
 	// 更新文章

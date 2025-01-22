@@ -6,6 +6,7 @@ import (
 	"gvb_server/flag"
 	"gvb_server/global"
 	"gvb_server/routers"
+	"gvb_server/service/cornServer"
 	"gvb_server/utils"
 )
 
@@ -40,6 +41,9 @@ func main() {
 	global.Redis = core.InitRedis()
 	// es
 	global.ESClient = core.InitElasticSearch()
+
+	// sync
+	cornServer.CornInit()
 
 	// router
 	router := routers.InitRouter()

@@ -16,7 +16,7 @@ import (
 	"strings"
 )
 
-/*var WhiteImageList = []string{
+var WhiteImageList = []string{
 	".bmp", ".jpg", ".png",
 	".tif", ".gif", ".pcx",
 	".tga", ".exif", ".fpx",
@@ -25,7 +25,7 @@ import (
 	".eps", ".ai", ".raw",
 	".WMF", ".webp", ".avif",
 	".apng",
-}*/
+}
 
 type FileUploadResponse struct {
 	FileName  string `json:"file_name"`

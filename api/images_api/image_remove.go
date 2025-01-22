@@ -17,7 +17,7 @@ import (
 // @Router /api/images [delete]
 // @Produce json
 // @Success 200 {object} res.Response{}
-func (imagesApi *ImagesApi) ImageRemoveView(c *gin.Context) {
+func (*ImagesApi) ImageRemoveView(c *gin.Context) {
 	var cr models.RemoveRequest
 	err := c.ShouldBindJSON(&cr)
 	if err != nil {
